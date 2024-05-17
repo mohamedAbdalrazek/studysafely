@@ -1,6 +1,8 @@
 :root{
     --main-dark:#305b54;
-    --light:#fff
+    --sub-dark:#1c3531;
+    --light:#fff;
+    --section-padding:40px;
 }
 * {
     font-family: "Rubik", sans-serif;
@@ -24,6 +26,22 @@
 .global-btn:hover{
     background-color: var(--main-dark);
     color: var(--light)    ;
+}
+.special-header{
+    text-align: center;
+    font-size: 36px;
+    color: var(--sub-dark);
+    position: relative;
+}
+.special-header::after{
+    content: "";
+    width: 11%;
+    height: 2px;
+    position: absolute;
+    background-color: var(--sub-dark);
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 @media (min-width: 576px) {
     .container {
