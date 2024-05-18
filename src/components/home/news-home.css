@@ -5,20 +5,18 @@
 }
 
 .swiper {
-    margin-top: 50px;
-
 }
 
 .news-home .swiper-slide {
     display: flex;
     justify-content: center;
-    
 }
-.news-home .swiper-slide a{
-    
+.news-home .swiper-slide a {
+    margin-top: 50px;
+
+    transition: all 0.3s;
     background-color: var(--main-gray);
     border-radius: 10px;
-
 
     width: 90%;
 
@@ -27,8 +25,14 @@
     justify-content: space-between;
     text-decoration: none;
     align-items: center;
+    -webkit-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
 }
-.news-home .swiper-slide a .left{
+.news-home .swiper-slide a:hover {
+    transform: scale(1.02);
+}
+.news-home .swiper-slide a .left {
     position: relative;
     width: 40%;
     height: 200px;
@@ -38,38 +42,38 @@
     align-items: center;
     justify-content: center;
 }
-.news-home .swiper-slide a .left::after{
-    content: '';
+.news-home .swiper-slide a .left::after {
+    content: "";
     position: absolute;
     top: 0px;
     left: 0px;
     background-color: var(--sub-dark);
-    opacity: .5;
+    opacity: 0.5;
     width: 100%;
     height: 100%;
     border-radius: 10px 0 0 10px;
 }
-.news-home .swiper-slide a .left img{
+.news-home .swiper-slide a .left img {
     max-width: 100%;
     min-height: 100%;
 }
-.news-home .swiper-slide a .right{
+.news-home .swiper-slide a .right {
     text-align: right;
     color: var(--sub-dark);
     padding: 10px 20px;
 }
-.news-home .swiper-slide a .right h3{
+.news-home .swiper-slide a .right h3 {
     font-size: 24px;
     margin-bottom: 20px;
 }
-.news-home .swiper-slide a .right p{
+.news-home .swiper-slide a .right p {
     width: 85%;
     margin-left: auto;
     font-size: 15px;
     margin-bottom: 12px;
     line-height: 24px;
 }
-.news-home .swiper-slide a .right span{
+.news-home .swiper-slide a .right span {
     font-size: 10px;
     background-color: #cae5ff;
     color: #4b659f;
@@ -77,7 +81,7 @@
     margin-left: 8px;
     border-radius: 5px;
 }
-.news-home .swiper-pagination{
+.news-home .swiper-pagination {
     position: static;
     margin-top: 20px;
 }

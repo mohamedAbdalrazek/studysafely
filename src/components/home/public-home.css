@@ -1,0 +1,59 @@
+.public-home{
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    background-color: var(--main-gray);
+    height: calc(100vh - 67px - 2 * var(--section-padding));
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+.public-home .swiper-slide{
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+}
+.public-home .left{
+    display: flex;
+    justify-content: center;
+    width: 35%;
+}
+.public-home .left img{
+    width: 200px;
+}
+
+
+.public-home .right{
+    text-align: right;
+    width: 65%;
+    color: var(--sub-dark);
+}
+
+.public-home .right h3{
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+.public-home .right p{
+    width: 90%;
+    margin-left: auto;
+    margin-bottom: 12px;
+    line-height: 24px;
+} 
+.public-home .right a{
+    text-decoration: none;
+    color: blue;
+    position: relative;
+}
+.public-home .right a::before{
+    content: '<';
+    position: absolute;
+    font-size: 16px;
+    left: -12px;
+    top: 2px;
+
+}
+.public-home  .swiper-pagination {
+    position: static;
+    margin-top: 20px;
+}
