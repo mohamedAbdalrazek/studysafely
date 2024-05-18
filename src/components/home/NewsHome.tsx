@@ -9,7 +9,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 // import required modules
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 // import function to register Swiper custom elements
 import { register } from "swiper/element/bundle";
 import "./news-home.css";
@@ -103,6 +103,7 @@ const NewsHome: React.FC = () => {
                     autoplay={{
                         delay: 5000,
                         disableOnInteraction: true,
+                        pauseOnMouseEnter:true
                     }}
                     // navigation={true}
                     modules={[Pagination, Autoplay]}

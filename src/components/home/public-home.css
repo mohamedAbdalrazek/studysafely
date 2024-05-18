@@ -9,10 +9,15 @@
 }
 .public-home .swiper-slide{
     display: flex;
+    flex-direction: row-reverse;
     gap: 20px;
     justify-content: space-between;
     align-items: center;
     margin-top: 50px;
+    cursor: grab;
+}
+.public-home .swiper-slide:active{
+    cursor: grabbing;
 }
 .public-home .left{
     display: flex;
@@ -40,19 +45,6 @@
     margin-bottom: 12px;
     line-height: 24px;
 } 
-.public-home .right a{
-    text-decoration: none;
-    color: blue;
-    position: relative;
-}
-.public-home .right a::before{
-    content: '<';
-    position: absolute;
-    font-size: 16px;
-    left: -12px;
-    top: 2px;
-
-}
 .public-home  .swiper-pagination {
     position: static;
     margin-top: 20px;

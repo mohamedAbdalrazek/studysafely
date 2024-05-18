@@ -41,9 +41,7 @@ const PublicHome:React.FC = ()=>{
     const dataListElement = publicHome?.dataList.map((data, index)=>{
         return(
             <SwiperSlide key={index}>
-                <div className="left">
-                    <img src={data?.imageUrl} alt={data?.imageName} />
-                </div>
+                
                 <div className="right">
                     <h3>
                         {data?.header}
@@ -51,9 +49,12 @@ const PublicHome:React.FC = ()=>{
                     <p>
                         {data?.subHeader}
                     </p>
-                    <Link to={"public"}>
+                    <Link to={"public"} className="special-link">
                         {publicHome?.link}
                     </Link>
+                </div>
+                <div className="left">
+                    <img src={data?.imageUrl} alt={data?.imageName} />
                 </div>
             </SwiperSlide>
         )
@@ -73,6 +74,7 @@ const PublicHome:React.FC = ()=>{
                         autoplay={{
                             delay: 10000,
                             disableOnInteraction: true,
+                            pauseOnMouseEnter:true
                         }}
                         // navigation={true}
                         modules={[Pagination, Autoplay]}
