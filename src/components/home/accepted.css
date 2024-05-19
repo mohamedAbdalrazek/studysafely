@@ -1,0 +1,41 @@
+.accepted-home {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    background-color: var(--lite);
+}
+.accepted-home .accepted-list{
+    display: flex;
+    justify-content: center;
+}
+.accepted-home .swiper {
+    width: 100%;
+    margin-top: 50px;
+
+}
+
+.accepted-home .swiper .swiper-slide {
+    box-shadow: none;
+    transition: all 0.3s;
+    
+    
+}
+.accepted-home .swiper .swiper-slide:active {
+    box-shadow: none;
+}
+
+.accepted-home .swiper .swiper-slide img {
+    border-radius: 10px;
+
+    box-shadow: none;
+    display: block;
+    margin: auto;
+    width: 100%;
+    border: 1px solid var(--main-dark);
+}
+
+.accepted-home .swiper .swiper-slide-active {
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+}
+

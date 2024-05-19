@@ -1,3 +1,7 @@
+.accepted-list{
+    display: flex;
+    justify-content: center;
+}
 .private-home{
     padding-top: var(--section-padding);
     padding-bottom: var(--section-padding);
