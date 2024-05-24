@@ -1,7 +1,7 @@
 import "./news.css";
 import { collection, doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../api/firestore";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 const News: React.FC = () => {
     interface pageDataMap {

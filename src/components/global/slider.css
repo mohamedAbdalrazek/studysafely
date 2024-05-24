@@ -1,0 +1,39 @@
+.slider .swiper-slide{
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+    cursor: grab;
+}
+.slider .swiper-slide:active{
+    cursor: grabbing;
+}
+.slider .left{
+    display: flex;
+    justify-content: center;
+    width: 35%;
+}
+.slider .left img{
+    width: 200px;
+}
+.slider .right{
+    text-align: right;
+    width: 65%;
+    color: var(--sub-dark);
+}
+.slider .right h3{
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+.slider .right p{
+    width: 90%;
+    margin-left: auto;
+    margin-bottom: 12px;
+    line-height: 24px;
+} 
+.slider  .swiper-pagination {
+    position: static;
+    margin-top: 20px;
+}

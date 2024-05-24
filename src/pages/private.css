@@ -1,3 +1,4 @@
 .private{
     padding-top:calc(var(--nav-height) + var(--section-padding));
+    background-color: white;
 }
