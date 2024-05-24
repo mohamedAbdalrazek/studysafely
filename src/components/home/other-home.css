@@ -1,7 +1,7 @@
 .other-home{
     padding-top: var(--section-padding);
     padding-bottom: var(--section-padding);
-    min-height: calc(100vh - 67px - 2 * var(--section-padding));
+    min-height: calc(100vh - var(--nav-height) - 2 * var(--section-padding));
     background-color: var(--main-gray);
 }
 .other-home .list{

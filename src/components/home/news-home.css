@@ -73,14 +73,6 @@
     margin-bottom: 12px;
     line-height: 24px;
 }
-.news-home .swiper-slide a .right span {
-    font-size: 10px;
-    background-color: #cae5ff;
-    color: #4b659f;
-    padding: 4px;
-    margin-left: 8px;
-    border-radius: 5px;
-}
 .news-home .swiper-pagination {
     position: static;
     margin-top: 20px;

@@ -43,7 +43,7 @@ const Accepted: React.FC = () => {
     const acceptedElement = accptedHome?.acceptedList.map((accepted, index) => {
         return (
             <SwiperSlide key={index}>
-                <img src={accepted.imageUrl} alt={accepted.imageName}/>
+                <img src={accepted.imageUrl} alt={accepted.imageName} />
             </SwiperSlide>
         );
     });
@@ -56,24 +56,24 @@ const Accepted: React.FC = () => {
                         zoom={true}
                         effect={"coverflow"}
                         autoplay={{
-                            delay:5000,
+                            delay: 5000,
                             disableOnInteraction: true,
-                        pauseOnMouseEnter:true
+                            pauseOnMouseEnter: true,
                         }}
                         slidesPerView={3}
                         grabCursor={true}
                         centeredSlides={true}
                         slideToClickedSlide={true}
                         coverflowEffect={{
-                            slideShadows:true,
+                            slideShadows: true,
                             scale: 0.95,
                             rotate: 0,
                             stretch: 30,
                             depth: 100,
                             modifier: 1,
                         }}
-                        pagination = {{
-                            clickable:true
+                        pagination={{
+                            clickable: true,
                         }}
                         modules={[EffectCoverflow, Pagination, Zoom]}
                         className="mySwiper"

@@ -81,7 +81,7 @@ const NewsHome: React.FC = () => {
                         <p>{news.subTitle}</p>
                         <div>
                             {news.hashtages.map((hashtage: any) => {
-                                return <span key={hashtage}>{hashtage}</span>;
+                                return <span className="hashtage" key={hashtage}>{hashtage}</span>;
                             })}
                         </div>
                     </div>

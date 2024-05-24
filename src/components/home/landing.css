@@ -7,7 +7,7 @@
     align-items: center;
 }
 .landing .content{
-    margin-top: 67px;
+    margin-top: var(--nav-height);
     text-align: center;
     
 }
