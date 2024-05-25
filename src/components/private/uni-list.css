@@ -1,0 +1,96 @@
+.uni-list {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.uni-list h1 {
+    margin-bottom: 30px;
+}
+.uni-list .list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.uni-list .list .uni {
+    width: calc(100% / 3 - 20px);
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.15);
+    height: 350px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all .3s;
+}
+.uni-list .list .uni:hover{
+    transform: scale(1.03);
+}
+.uni-list .list .uni .background {
+    position: relative;
+    overflow: hidden;
+    height: 60%;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+    width: 100%;
+}
+.uni-list .list .uni .background::after {
+    content: "";
+    background-color: black;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.uni-list .list .uni .background img {
+    width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+}
+.uni-list .list .uni .uni-info{
+    height: 50%;
+}
+.uni-list .list .uni .uni-info .main-info{
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.uni-list .list .uni .uni-info .main-info .logo{
+    overflow: hidden;
+    width: 20%;
+}
+.uni-list .list .uni .uni-info .main-info .logo img{
+    max-width: 100%;
+}
+.uni-list .list .uni .uni-info .main-info .text{
+    color: var(--sub-dark);
+}
+.uni-list .list .uni .uni-info .main-info .text h3{
+    font-size: 22px;
+}
+.uni-list .list .uni .uni-info .main-info .text p{
+    font-size: 12px;
+    color:red ;
+    font-weight: 600;
+} 
+.uni-list .list .uni .uni-info .sub-info{
+    display: flex;
+    flex-direction: column;
+    text-align: center; 
+    padding-right: 20px;
+}
+.uni-list .list .uni .uni-info .sub-info span{
+    margin-left: auto;
+    color: black;
+}
+.uni-list .list .uni .uni-info .sub-info span:last-of-type{
+    margin-right: 25px;
+    font-weight: 600;
+    position: relative;
+}
+.uni-list .list .uni .uni-info .sub-info span:last-of-type::before{
+    content: '$';
+}
