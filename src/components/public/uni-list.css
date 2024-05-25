@@ -1,0 +1,76 @@
+.public-uni-list{
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.public-uni-list h1{
+    margin-bottom: 40px;
+}
+.public-uni-list .list{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.public-uni-list .list .uni{
+    display: flex;
+    gap:20px;
+    height: 200px;
+    -webkit-box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.15);
+    align-items: center;
+    padding-right: 10px;
+    text-decoration: none;
+    transition: all .3s;
+}
+.public-uni-list .list .reverse{
+    flex-direction: row-reverse;
+    padding-right: 0;
+    padding-left: 10px;
+}
+.public-uni-list .list .uni:hover{
+    transform: scale(1.03);
+}
+.public-uni-list .list .uni .background{
+    width: 30%;
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+}
+.public-uni-list .list .uni .background::after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: .5;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+.public-uni-list .list .uni .background img{
+     height: 100%;
+    min-width: 100%; 
+}
+.public-uni-list .list .uni .text{
+    color: var(--sub-dark);
+}
+.public-uni-list .list .uni .text h3{
+    font-size: 26px;
+}
+.public-uni-list .list .uni span{
+    color: red;
+    font-size: 14px;
+    font-weight: 700;
+}
+.public-uni-list .list .uni p{
+    margin-top: 15px;
+    text-align: right;
+    font-weight: 500;
+    font-size: 18;
+}
+.public-uni-list .list .uni .logo{
+    width: 25%;
+}
+.public-uni-list .list .uni .logo img{
+    width: 100%;
+    margin-right: 10px;
+}

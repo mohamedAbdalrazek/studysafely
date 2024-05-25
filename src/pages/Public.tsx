@@ -1,19 +1,20 @@
+import "./public.css"
 import Slider from "../components/global/Slider";
 import "./private.css";
 import { collection, doc, getDoc } from "firebase/firestore";
 import { db } from "../api/firestore";
 import { useEffect, useState } from "react";
-import PrivateVideos from "../components/private/PrivateVideos";
-import UniList from "../components/private/UniList";
-const Private = () => {
+import PublicVideos from "../components/public/PublicVideos"
+import UniList from "../components/public/UniList";
+const Public = ()=>{
     interface paramtersMap {
         [key: string]: any;
     }
     interface pageDatamap {
-        info: [
+        infoList: [
             {
                 [key: string]: string;
-            }
+            } 
         ];
         infoHeader: string;
         listHeader: string;
@@ -22,33 +23,22 @@ const Private = () => {
         videosHeader: string;
         whatsLink: string;
     }
-
     const [pageData, setPageData] = useState<pageDatamap>();
     useEffect(() => {
-        const docRef = doc(collection(db, "private"), "private");
+        const docRef = doc(collection(db, "public"), "public");
         getDoc(docRef).then((res: paramtersMap): void => {
             const date = res.data();
             setPageData(date);
         });
     }, []);
-    return (
-        <div className="private">
+    return(
+        <div className="public">
             <div className="container">
-                <Slider
-                    header={pageData?.infoHeader}
-                    dataList={pageData?.info}
-                    linkTo={undefined}
-                />
-                <PrivateVideos
-                    header={pageData?.videosHeader}
-                    more={pageData?.moreVideos}
-                />
-                <UniList
-                    listHeader={pageData?.listHeader}
-                    listNumber={pageData?.listNumber}
-                />
+                <Slider header={pageData?.infoHeader} dataList={pageData?.infoList} linkTo={undefined} />
+                <PublicVideos header={pageData?.videosHeader} more={pageData?.moreVideos} />
+                <UniList listHeader={pageData?.listHeader} listNumber={pageData?.listNumber} />
             </div>
         </div>
-    );
-};
-export default Private;
+    )
+}
+export default Public
