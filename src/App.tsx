@@ -7,6 +7,7 @@ import Apply from "./pages/Apply";
 import News from "./pages/News";
 import Private from "./pages/Private";
 import Public from "./pages/Public";
+import Partial from "./pages/Partial";
 function App() {
     return (
         <BrowserRouter>
@@ -17,6 +18,7 @@ function App() {
                 <Route element={<News />} path="news" />
                 <Route element={<Private />} path="private" />
                 <Route element={<Public />} path="public" />
+                <Route element={<Partial />} path="partial" />
             </Routes>
         </BrowserRouter>
     );

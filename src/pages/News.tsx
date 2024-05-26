@@ -61,7 +61,7 @@ const News: React.FC = () => {
             <Link
                 key={news.sortDate}
                 className="news-element"
-                to={`${news.parentDomain}/${news.subDomain}`}
+                to={`/${news.parentDomain}/${news.subDomain}`}
             >
                 <div className="left">
                     <h3>{news?.title}</h3>
