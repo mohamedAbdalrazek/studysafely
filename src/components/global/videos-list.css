@@ -1,14 +1,14 @@
-.private-videos{
+.videos-list{
     padding-top: 60px;
     padding-bottom: 60px;
 }
-.private-videos h1{
+.videos-list h1{
     margin-bottom:30px ;
 }
-.private-videos .swiper{
+.videos-list .swiper{
     margin-bottom: 10px;
 }
-.private-videos .more{
+.videos-list .more{
     color: var(--sub-dark);
     position: relative;
     font-weight: 700;
@@ -16,10 +16,10 @@
     margin-left: 20px;
     
 }
-.private-videos .more::before{
+.videos-list .more::before{
     content: "<";
     font-size: 18px;
 }
-.private-videos .more:hover{
+.videos-list .more:hover{
     text-decoration: underline;
 }

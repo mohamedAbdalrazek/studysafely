@@ -3,7 +3,7 @@ import "./private.css";
 import { collection, doc, getDoc } from "firebase/firestore";
 import { db } from "../api/firestore";
 import { useEffect, useState } from "react";
-import PrivateVideos from "../components/private/PrivateVideos";
+import VideosList from "../components/global/VideosList";
 import UniList from "../components/private/UniList";
 const Private = () => {
     interface paramtersMap {
@@ -39,9 +39,10 @@ const Private = () => {
                     dataList={pageData?.info}
                     linkTo={undefined}
                 />
-                <PrivateVideos
+                <VideosList
                     header={pageData?.videosHeader}
                     more={pageData?.moreVideos}
+                    root = "private"
                 />
                 <UniList
                     listHeader={pageData?.listHeader}

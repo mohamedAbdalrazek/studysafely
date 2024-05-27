@@ -4,7 +4,7 @@ import "./private.css";
 import { collection, doc, getDoc } from "firebase/firestore";
 import { db } from "../api/firestore";
 import { useEffect, useState } from "react";
-import PublicVideos from "../components/public/PublicVideos"
+import VideosList from "../components/global/VideosList"
 import UniList from "../components/public/UniList";
 const Public = ()=>{
     interface paramtersMap {
@@ -35,7 +35,7 @@ const Public = ()=>{
         <div className="public">
             <div className="container">
                 <Slider header={pageData?.infoHeader} dataList={pageData?.infoList} linkTo={undefined} />
-                <PublicVideos header={pageData?.videosHeader} more={pageData?.moreVideos} />
+                <VideosList header={pageData?.videosHeader} more={pageData?.moreVideos} root="public" />
                 <UniList listHeader={pageData?.listHeader} listNumber={pageData?.listNumber} />
             </div>
         </div>

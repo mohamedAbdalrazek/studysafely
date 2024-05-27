@@ -34,7 +34,23 @@
 
 .videos-slider .video-box video{
     border-radius: 10px 10px 0 0 ;
-    margin-bottom: 10px;
+    padding: 0;
+}
+.videos-slider .video-box .video-container{
+    position: relative;
+    width: 100%;
+    height: fit-content;
+}
+
+.videos-slider .video-box .video-container .icon{
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    width: 25%;
+    height: 25%;
+    object-fit: contain;
+    transform: translate(-50%, -50%);
 }
 .videos-slider .video-box h3{
     color: var(--sub-dark);

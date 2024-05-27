@@ -8,6 +8,8 @@ import News from "./pages/News";
 import Private from "./pages/Private";
 import Public from "./pages/Public";
 import Partial from "./pages/Partial";
+import Videos from "./pages/Videos";
+import Agent from "./pages/Agent";
 function App() {
     return (
         <BrowserRouter>
@@ -19,6 +21,8 @@ function App() {
                 <Route element={<Private />} path="private" />
                 <Route element={<Public />} path="public" />
                 <Route element={<Partial />} path="partial" />
+                <Route element={<Videos />} path="videos" />
+                <Route element={<Agent />} path="agent" />
             </Routes>
         </BrowserRouter>
     );

@@ -3,6 +3,7 @@ import { collection, doc, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../api/firestore";
 import "./list.css"
+import { Link } from "react-router-dom";
 interface childrenMap {
     listHeader: string | undefined;
     listNumber: number | undefined;
@@ -41,6 +42,7 @@ const List = ()=>{
     console.log(scholarList)
     const scholarListElement = scholarList.map((scholar)=>{
         const hashtagesArray = scholar.hashtages.split(".");
+        const url:string = scholar.mainInfo.replace(/ /g, "-")
         console.log(hashtagesArray)
         return(
             <div className="scholar">
@@ -50,8 +52,8 @@ const List = ()=>{
                     </h3>
                     <div className="sub-info">
                         <div className="left">
-                            <button className="global-btn">اقرأ المزيد</button>
-                            <button className="global-btn">{scholar.buttonText}</button>
+                            <Link to={url} className="global-btn">اقرأ المزيد</Link>
+                            <a  href={scholar.buttonLink} className="global-btn">{scholar.buttonText}</a>
                         </div>
                         <div className="right">
                             <div className="prices">

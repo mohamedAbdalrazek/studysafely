@@ -1,6 +1,7 @@
 .news{
     padding-top: calc(var(--section-padding) + var(--nav-height));
     padding-bottom: var(--section-padding);
+    background-color: white;
 
 }
 .news .left-section h1{
