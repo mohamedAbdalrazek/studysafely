@@ -19,7 +19,6 @@ interface chidrenMap {
     videosList: { [key: string]: string }[] | undefined;
 }
 const VideosSlider = (children: chidrenMap) => {
-    console.log(children);
     const videosListElement = children.videosList?.map((video) => {
         return (
             <>

@@ -3,7 +3,7 @@ import { db } from "../../api/firestore";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./nav.css";
-import besideLogo from "../../assets/images/beside.png"
+import besideLogo from "../../assets/images/beside.png";
 const Nav: React.FC = () => {
     interface LinkMap {
         [key: string]: string;
@@ -22,7 +22,9 @@ const Nav: React.FC = () => {
     return (
         <div className="nav">
             <div className="container">
-                <Link className="logo" to="/"><img src={besideLogo} alt="" /></Link>
+                <Link className="logo" to="/">
+                    <img src={besideLogo} alt="" />
+                </Link>
                 <div className="links">
                     <Link to="/">{links.home}</Link>
                     <Link to="private">{links.private}</Link>

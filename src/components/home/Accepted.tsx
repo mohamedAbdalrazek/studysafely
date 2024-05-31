@@ -39,7 +39,6 @@ const Accepted: React.FC = () => {
         };
         fetchDataHome();
     }, []);
-    console.log(accptedHome);
     const acceptedElement = accptedHome?.acceptedList.map((accepted, index) => {
         return (
             <SwiperSlide key={index}>

@@ -15,7 +15,6 @@ interface childrenMap {
 }
 const VideosList = (children: childrenMap) => {
     const [videos, setVideos] = useState<VideosMap[]>();
-    console.log(children.root)
     const root:string = children.root == "public" ? "public": children.root == "private" ? "private": "other"
     useEffect(() => {
         const fetchDataHome = async () => {

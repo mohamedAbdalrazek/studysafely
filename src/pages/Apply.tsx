@@ -32,7 +32,6 @@ const Apply:React.FC = ()=>{
             setVideo(videos[0]);
         });
     }, []);
-    console.log(video)
 
     return(
         <div className="apply">

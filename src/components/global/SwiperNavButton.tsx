@@ -13,7 +13,6 @@ export const SwiperNavButtons = () => {
     
   }
   swiper.on('slideChange', function () {
-    console.log('slide changed');
     setIsEnd(swiper.isEnd)
     setIsBeginning(swiper.isBeginning)
   });

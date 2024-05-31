@@ -23,7 +23,6 @@ const PrivateHome:React.FC = ()=>{
         };
         fetchDataHome();       
     }, []);
-    console.log(privateHome)
     return(
         <div className="private-home">
             <div className="container">

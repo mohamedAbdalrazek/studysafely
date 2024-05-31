@@ -4,6 +4,7 @@ import { collection, doc, getDoc } from "firebase/firestore";
 import { db } from "../api/firestore";
 import { useEffect, useState } from "react";
 import List from "../components/partial/List";
+import SideBar from "../components/global/SideBar";
 const Partial = () => {
     interface paramtersMap {
         [key: string]: any;
@@ -30,8 +31,15 @@ const Partial = () => {
         <div className="partial">
             <div className="container sub-page">
                 <div className="left-section">
-                    <Slider dataList={pageData?.infoList} header={pageData?.infoTitle} linkTo={undefined} />
+                    <Slider
+                        dataList={pageData?.infoList}
+                        header={pageData?.infoTitle}
+                        linkTo={undefined}
+                    />
                     <List />
+                </div>
+                <div className="right-section">
+                    <SideBar root="partial" filter=""/>
                 </div>
             </div>
         </div>

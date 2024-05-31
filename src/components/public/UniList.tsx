@@ -42,7 +42,6 @@ const UniList = (children: childrenMap) => {
             setUniList(UniData);
         });
     }, []);
-    console.log(uniList);
     const uniListElement = uniList.map((uni, index) => {
         const url:string = uni.name.replace(/ /g, "-")
         

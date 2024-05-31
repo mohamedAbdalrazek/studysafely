@@ -33,7 +33,6 @@ const Agent = ()=>{
             setVideo(videos[videos.length - 1]);
         });
     }, []);
-    console.log(agentData)
     return(
         <div className="agent">
             <div className="container">

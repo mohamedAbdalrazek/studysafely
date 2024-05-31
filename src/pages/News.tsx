@@ -3,28 +3,29 @@ import { collection, doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../api/firestore";
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import SideBar from "../components/global/SideBar";
+interface pageDataMap {
+    number: number;
+    sidebarPrivate: string;
+    sidebarPublic: string;
+    sidebarVideos: string;
+    title: string;
+}
+interface paramtersMap {
+    [key: string]: any;
+}
+interface newsListMap {
+    hashtages: [string];
+    date: string;
+    imageName: string;
+    imageUrl: string;
+    sortDate: number;
+    parentDomain: string;
+    subDomain: string;
+    subTitle: string;
+    title: string;
+}
 const News: React.FC = () => {
-    interface pageDataMap {
-        number: number;
-        sidebarPrivate: string;
-        sidebarPublic: string;
-        sidebarVideos: string;
-        title: string;
-    }
-    interface paramtersMap {
-        [key: string]: any;
-    }
-    interface newsListMap {
-        hashtages: [string];
-        date: string;
-        imageName: string;
-        imageUrl: string;
-        sortDate: number;
-        parentDomain: string;
-        subDomain: string;
-        subTitle: string;
-        title: string;
-    }
     let [searchParams, setSearchParams]: [URLSearchParams, Function] =
         useSearchParams();
     const [pageData, setPageData] = useState<pageDataMap>();
@@ -51,9 +52,8 @@ const News: React.FC = () => {
             setNewsList(newsData);
             let count = Math.ceil(newsData.length / pageData?.number);
             setPagesNumberArray(Array.from({ length: count }, (_, i) => i + 1));
-        }),
-            [];
-    });
+        })
+    },[]);
     const firstIndex = searchParams.get("page")?searchParams.get("page"):0
     const lastIndex = searchParams.get("page")?(searchParams.get("page")+ pageData?.number):pageData?.number
     const newsListElement = newsList.slice(firstIndex, lastIndex).map((news) => {
@@ -92,7 +92,6 @@ const News: React.FC = () => {
             </span>
         );
     });
-
     return (
         <div className="news">
             <div className="container sub-page">
@@ -100,6 +99,9 @@ const News: React.FC = () => {
                     <h1 className="special-header">{pageData?.title}</h1>
                     <div className="news-list">{newsListElement}</div>
                     <div className="pages-number">{pagesNumbersElement}</div>
+                </div>
+                <div className="right-section">
+                    <SideBar root="news" filter=""/>
                 </div>
             </div>
         </div>

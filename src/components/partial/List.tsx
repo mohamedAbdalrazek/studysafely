@@ -39,11 +39,9 @@ const List = ()=>{
             setScholarList(scholarData);
         });
     }, []);
-    console.log(scholarList)
     const scholarListElement = scholarList.map((scholar)=>{
         const hashtagesArray = scholar.hashtages.split(".");
         const url:string = scholar.mainInfo.replace(/ /g, "-")
-        console.log(hashtagesArray)
         return(
             <div className="scholar">
                 <div className="content">
