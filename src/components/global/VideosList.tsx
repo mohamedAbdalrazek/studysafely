@@ -40,6 +40,7 @@ const VideosList = (children: childrenMap) => {
             {children.more&&<Link to={"/videos"} className="more">
                 {children.more}
             </Link>}
+
         </div>
     );
 };

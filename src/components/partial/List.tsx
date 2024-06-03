@@ -1,12 +1,11 @@
 
 import { collection, doc, onSnapshot } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { db } from "../../api/firestore";
 import "./list.css"
 import { Link } from "react-router-dom";
 interface childrenMap {
-    listHeader: string | undefined;
-    listNumber: number | undefined;
+    [key: string]: any;
 }
 interface paramtersMap {
     [key: string]: any;
@@ -24,13 +23,11 @@ interface ScholarListMap {
     logoUrl:string;
     logoName:string;
 }
-const List = ()=>{
+const List = (children:childrenMap)=>{
     const [scholarList, setScholarList] = useState<ScholarListMap[]>([]);
     useEffect(() => {
-        const scholarListRef = collection(
-            doc(collection(db, "partial"), "partialScholars"),
-            "partialScholars"
-        );
+        
+        const scholarListRef = children.listRef
         onSnapshot(scholarListRef, (res: paramtersMap): void => {
             const scholarData: ScholarListMap[] = res.docs.map((doc: any) => ({
                 ...doc.data(),
@@ -50,7 +47,7 @@ const List = ()=>{
                     </h3>
                     <div className="sub-info">
                         <div className="left">
-                            <Link to={url} className="global-btn">اقرأ المزيد</Link>
+                            <Link to={"/partial/"+url} className="global-btn">اقرأ المزيد</Link>
                             <a  href={scholar.buttonLink} className="global-btn">{scholar.buttonText}</a>
                         </div>
                         <div className="right">

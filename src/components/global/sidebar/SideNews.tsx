@@ -28,32 +28,15 @@ const SideNews = ()=>{
                 ...doc.data(),
                 id: doc.id,
             }));
+            data.sort((a, b) => {
+                return b.sortDate - a.sortDate;
+            });
             setNewsList(data);
         });
     }, []);
-    function getRandomElemnts(arr:newsMap[]|undefined) {
-        if(arr === undefined){
-            return
-        }
-        if ( arr.length < 2) {
-            return [arr[0]]
-        }
-
-        const index1 = Math.floor(Math.random() * arr.length);
-
-        let index2;
-        do {
-            index2 = Math.floor(Math.random() * arr.length);
-        } while (index2 === index1);
-
-        // Return the two elements
-        return [arr[index1], arr[index2]];
-    }
-    const filteredList = getRandomElemnts(newsList)
-    const listElement = filteredList?.map((news)=>{
+    const listElement = newsList?.slice(0,2)?.map((news)=>{
         return(
-            <Link to={"/"+news.parentDomain + "/" + news.subDomain}>
-
+            <Link to={"/"+news.parentDomain + "/" + news.subDomain} key={news.title}>
                 <div className="content">
                     <h3>
                         {news.title}

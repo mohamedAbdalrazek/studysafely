@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 interface paramtersMap {
     [key: string]: any;
 }
-interface children{
-    name:string
+interface children {
+    filter: string;
 }
 interface PrivateMap {
     body: string;
@@ -29,7 +29,7 @@ interface PrivateMap {
     whatsLink: string;
 }
 
-const SidePrivate = (children:children)=>{
+const SidePrivate = (children: children) => {
     const [privateUniList, setPrivateUniList] = useState<PrivateMap[]>();
     useEffect(() => {
         const privateUniRef = collection(
@@ -37,7 +37,7 @@ const SidePrivate = (children:children)=>{
             "privateUni"
         );
         onSnapshot(privateUniRef, (res: paramtersMap): void => {
-            const data:PrivateMap[] = res.docs.map((doc: any) => ({
+            const data: PrivateMap[] = res.docs.map((doc: any) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
@@ -45,12 +45,12 @@ const SidePrivate = (children:children)=>{
         });
     }, []);
 
-    function getRandomElemnts(arr:PrivateMap[]|undefined) {
-        if(arr === undefined){
-            return
+    function getRandomElemnts(arr: PrivateMap[] | undefined) {
+        if (arr === undefined) {
+            return;
         }
-        if ( arr.length < 2) {
-            return [arr[0]]
+        if (arr.length < 2) {
+            return [arr[0]];
         }
 
         const index1 = Math.floor(Math.random() * arr.length);
@@ -63,32 +63,34 @@ const SidePrivate = (children:children)=>{
         // Return the two elements
         return [arr[index1], arr[index2]];
     }
-    const filteredList = getRandomElemnts(privateUniList?.filter((uni)=>uni.name!== children.name))
-    const listElement = filteredList?.map((uni)=>{
-        const url:string = uni.name.replace(/ /g, "-")
-        return(
-            <Link to={"/private/"+url}>
+    const filteredList = getRandomElemnts(
+        privateUniList?.filter((uni) => uni.name != children.filter)
+    );
+    console.log(children.filter)
+    const listElement = filteredList?.map((uni) => {
+        const url: string = uni?.name.replace(/ /g, "-");
+        return (
+            <Link to={"/private/" + url} key={uni?.name}>
                 <div className="image">
-                    <img src={uni.logoUrl} alt={uni.logoName} />
+                    <img src={uni?.logoUrl} alt={uni?.logoName} />
                 </div>
                 <div className="content">
-                    <h3>
-                        {uni.name}
-                    </h3>
-                    <span className="location">
-                        {uni.location}
-                    </span>
+                    <h3>{uni?.name}</h3>
+                    <span className="location">{uni?.location}</span>
                 </div>
             </Link>
-        )
-    })
-    return(
-        <div className="side-uni">
-            <h1 className="side-header">
-                بعض الجامعات الخاصة
-            </h1>
-            {listElement}
-        </div>
-    )
-}
-export default SidePrivate
+        );
+    });
+    const check = filteredList ? filteredList[0] : undefined
+    return (
+        <>
+            {check   && (
+                <div className="side-uni">
+                    <h1 className="side-header">بعض الجامعات الخاصة</h1>
+                    {listElement}
+                </div>
+            )}
+        </>
+    );
+};
+export default SidePrivate;

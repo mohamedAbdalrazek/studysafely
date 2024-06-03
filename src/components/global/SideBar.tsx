@@ -9,15 +9,15 @@ import SideVideos from "./sidebar/SideVideos";
 import "./sidebar/sidebar.css"
 interface ChildrenMap {
     root: "public" | "private" | "news" | "videos" | "partial";
-    filter:string
+    filter:string|undefined
 }
 const SideBar = (children: ChildrenMap) => {
     const root = children.root;
     const filter = children.filter
     return (
         <div className="sidebar">
-            <SidePrivate name={`${root === "private" ? filter :""}`} />
-            <SidePublic name={`${root === "public" ? filter :""}`} />
+            <SidePrivate filter={`${root === "private" ? filter :""}`} />
+            <SidePublic filter={`${root === "public" ? filter :""}`} />
             {!(root === "news") &&<SideNews />}
             {!(root === "videos") && <SideVideos />}
         </div>

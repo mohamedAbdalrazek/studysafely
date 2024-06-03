@@ -30,12 +30,14 @@ const News: React.FC = () => {
         useSearchParams();
     const [pageData, setPageData] = useState<pageDataMap>();
     const [newsList, setNewsList] = useState<newsListMap[]>([]);
-    const [pagesNumberArray, setPagesNumberArray] = useState<number[]>();
+    // const [pagesNumberArray, setPagesNumberArray] = useState<number[]>();
+    const [pageDataNumber, setPageDataNumber] = useState(1)
     useEffect(() => {
         const docRef = doc(collection(db, "news"), "page");
         getDoc(docRef).then((res: paramtersMap): void => {
-            const date = res.data();
-            setPageData(date);
+            const data = res.data();
+            setPageData(data);
+            setPageDataNumber(data.number)
         });
         const newsListRef = collection(
             doc(collection(db, "news"), "newsList"),
@@ -50,12 +52,13 @@ const News: React.FC = () => {
                 return b.sortDate - a.sortDate;
             });
             setNewsList(newsData);
-            let count = Math.ceil(newsData.length / pageData?.number);
-            setPagesNumberArray(Array.from({ length: count }, (_, i) => i + 1));
         })
     },[]);
-    const firstIndex = searchParams.get("page")?searchParams.get("page"):0
-    const lastIndex = searchParams.get("page")?(searchParams.get("page")+ pageData?.number):pageData?.number
+    // const pageDataNumber:number = pageData ? pageData.number : 0;
+    const page = searchParams.get("page");
+    const firstIndex = page ? (parseInt(page)-1)*pageDataNumber: 0;
+    const lastIndex = firstIndex?(firstIndex+ pageDataNumber):pageDataNumber
+    // console.log(firstIndex, lastIndex)
     const newsListElement = newsList.slice(firstIndex, lastIndex).map((news) => {
         return (
             <Link
@@ -82,7 +85,9 @@ const News: React.FC = () => {
             </Link>
         );
     });
-    const pagesNumbersElement = pagesNumberArray?.map((pageNumber) => {
+    // console.log(pagesNumberArray)
+    const pagesNumbersElement = Array.from({ length: Math.ceil(newsList.length / pageDataNumber) }, (_, i) => i + 1).map((pageNumber) => {
+        // console.log("test")
         return (
             <span
                 key={pageNumber}

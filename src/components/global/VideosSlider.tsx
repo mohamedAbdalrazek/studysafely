@@ -20,10 +20,11 @@ interface chidrenMap {
 }
 const VideosSlider = (children: chidrenMap) => {
     const videosListElement = children.videosList?.map((video) => {
+        const url:string = video.videoName.replace(/ /g, "-")
         return (
             <>
                 <SwiperSlide key={video.videoName} className="video-box">
-                    <Link to={`/videos/${video.videoName}`}>
+                    <Link to={`/videos/${url}`}>
                         <div className="video-container">
                             <ReactPlayer
                                 url={video.videoUrl}

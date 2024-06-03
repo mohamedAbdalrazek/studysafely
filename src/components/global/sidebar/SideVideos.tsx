@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { db } from "../../../api/firestore";
 import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
+import icon from "../../../assets/icons/play-button2.png";
+
 interface paramtersMap {
     [key: string]: any;
 }
@@ -26,14 +28,18 @@ const SideVideos = () => {
         });
     }, []);
     const videosELement = videosList?.map((video) => {
+        const url:string = video.videoName.replace(/ /g, "-")
+
         return (
-            <Link to={`/videos/${video.videoName}`} key={video.videoName}>
+            <Link to={`/videos/${url}`} key={video.videoName}>
                 <div className="video-container">
                     <ReactPlayer
                         url={video.videoUrl}
                         width={"100%"}
                         height={"500"}
                     />
+                    <img src={icon} alt="" className="icon" />
+
                 </div>
                 <h3>{video.videoName}</h3>
             </Link>

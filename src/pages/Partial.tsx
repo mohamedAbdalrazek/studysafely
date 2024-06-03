@@ -27,6 +27,10 @@ const Partial = () => {
             setPageData(date);
         });
     }, []);
+    const scholarListRef = collection(
+        doc(collection(db, "partial"), "partialScholars"),
+        "partialScholars"
+    );
     return (
         <div className="partial">
             <div className="container sub-page">
@@ -36,7 +40,7 @@ const Partial = () => {
                         header={pageData?.infoTitle}
                         linkTo={undefined}
                     />
-                    <List />
+                    <List listRef={scholarListRef} />
                 </div>
                 <div className="right-section">
                     <SideBar root="partial" filter=""/>
