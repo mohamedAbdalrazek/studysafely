@@ -1,0 +1,25 @@
+.videos-list{
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+.videos-list h1{
+    margin-bottom:30px ;
+}
+.videos-list .swiper{
+    margin-bottom: 10px;
+}
+.videos-list .more{
+    color: var(--sub-dark);
+    position: relative;
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 20px;
+    
+}
+.videos-list .more::before{
+    content: "<";
+    font-size: 18px;
+}
+.videos-list .more:hover{
+    text-decoration: underline;
+}

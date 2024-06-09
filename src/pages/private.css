@@ -1,0 +1,8 @@
+.private{
+    padding-top:calc(var(--nav-height) + var(--section-padding));
+    background-color: white;
+}
+.private .slider{
+    padding-top: 40px;
+    padding-bottom: 40px;
+}

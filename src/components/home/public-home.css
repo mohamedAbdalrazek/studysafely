@@ -1,0 +1,15 @@
+.public-home{
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    background-color: var(--main-gray);
+    height: calc(100vh - var(--nav-height) );
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+@media (max-width: 768px){
+    .public-home{
+        height: auto;
+    }
+}
+

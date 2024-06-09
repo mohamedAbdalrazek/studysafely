@@ -1,0 +1,82 @@
+.video-page{
+    padding-top: calc(var(--nav-height) + var(--section-padding));
+}
+.video-page .left-section .video{
+    width: 70%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+.video-page .left-section .info{
+    text-align: right;
+    background-color: var(--main-gray);
+    padding: 10px 15px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 35px;
+}
+.video-page .left-section .info h2{
+    color:var(--sub-dark);
+    margin-bottom: 10px;
+}
+
+.video-page .left-section .info p{
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+.video-page .left-section .buttons{
+    margin-bottom: 60px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.video-page .left-section .buttons a{
+    text-decoration: none;
+}
+.video-page .left-section .other-videos h1{
+    text-align: right;
+    margin-bottom: 30px;
+    color: var(--sub-dark);
+    font-size: 36px;
+}
+.video-page .left-section .other-videos .latest-videos{
+    display: flex;
+    gap: 20px;
+}
+
+.video-page .left-section .other-videos .latest-videos a{
+    text-decoration: none;
+    text-align: right;
+    background-color: var(--main-gray);
+    border-radius: 0 0 10px 10px;
+    padding-bottom: 10px;
+    -webkit-box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.15);
+    transition: all .3s;
+}
+.video-page .left-section .other-videos .latest-videos .video-container{
+    position: relative;
+}
+.video-page .left-section .other-videos .latest-videos .icon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 25%;
+    height: 25%;
+    object-fit: contain;
+    transform: translate(-50%, -50%);
+}
+.video-page .left-section .other-videos .latest-videos a:hover{
+    transform: scale(1.05);
+}
+.video-page .left-section .other-videos .latest-videos h3{
+    margin-right: 10px;
+    margin-top: 5px;
+    color: var(--sub-dark);
+    font-size: 16px;
+    width: 90%;
+    margin-left: auto;
+    margin-bottom: 5px;
+}

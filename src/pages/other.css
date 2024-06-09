@@ -1,0 +1,13 @@
+.other{
+    padding-top: calc(var(--nav-height) + var(--section-padding));
+    padding-bottom: var(--section-padding);
+    background-color: white;
+}
+.other .video{
+    width: 70%;
+    margin: auto;
+    margin-bottom: 40px;
+}
+.other .body{
+    margin-bottom: 40px;
+}

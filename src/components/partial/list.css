@@ -1,0 +1,70 @@
+.scholar-list{
+    padding-top: 40px;
+    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.scholar{
+    background-color: var(--main-gray);
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    justify-content: space-between;
+    gap: 20px;
+}
+.scholar .logo{
+    width: 20%;
+    text-align: right;
+}
+.scholar .logo img{
+    width: 80%;
+}
+.scholar .content{
+    width: 80%;
+    color: var(--sub-dark);
+
+}
+.scholar .content h3{
+    text-align: right;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.scholar .content .sub-info{
+    display: flex;
+    justify-content: space-between;
+    align-items:end;
+}
+.scholar .content .prices{
+    display: flex;
+    gap: 5px;
+    justify-content: right;
+    margin-bottom: 10px;
+}
+.scholar .content .prices span{
+    font-weight: 500;
+    font-size: 14px;
+}
+.scholar .content .prices span:last-of-type{
+    opacity: .5;
+    text-decoration: line-through;
+}
+.scholar .content .left{
+    /* margin-top: 30px; */
+    display: flex;
+    gap: 20px;
+}
+.scholar .content .left .global-btn{
+    background-color: transparent;
+    padding: 8px 20px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+}
+.scholar .content .left .global-btn:hover{
+    background-color: var(--main-dark);
+}

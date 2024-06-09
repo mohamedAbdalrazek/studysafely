@@ -1,0 +1,8 @@
+.partial{
+    padding-top: calc(var(--nav-height) + var(--section-padding));
+    background-color: white;
+}
+.partial .slider{
+    padding-top: 40px;
+    padding-bottom: 40px;
+}

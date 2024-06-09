@@ -1,0 +1,48 @@
+.partial-page{
+    padding-top: calc(var(--nav-height) + var(--section-padding));
+}
+.partial-page .main-info{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+.partial-page .main-info div{
+    width: 50%;
+}
+.partial-page .main-info .left{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.partial-page .main-info .logo{
+    width: 30%;
+}
+.partial-page .main-info .logo img{
+    width: 100%;
+}
+.partial-page .main-info .info{
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    color: rgb(43, 43, 43);
+    font-size: 14px;
+}
+.partial-page .body{
+    margin-bottom: 20px;
+}
+.partial-page .global-btn{
+    text-decoration: none;
+    display: block;
+    width: fit-content;
+    margin: auto;
+}
+.partial-page .main-info .right{
+    text-align: right;
+}
+.partial-page .main-info .right h3{
+    font-size: 18px;
+    color: var(--sub-dark);
+    margin-bottom: 10px;
+}
