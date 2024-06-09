@@ -5,7 +5,6 @@ import NewsHome from "../components/home/NewsHome"
 import OtherHome from "../components/home/OtherHome"
 import PrivateHome from "../components/home/PrivateHome"
 import PublicHome from "../components/home/PublicHome"
-<<<<<<< HEAD
 import { collection, doc, getDoc } from "firebase/firestore"
 import { db } from "../api/firestore"
 import { useEffect, useState } from "react"
@@ -28,9 +27,6 @@ const Home: React.FC = ()=>{
         });
     }
         ,[])
-=======
-const Home: React.FC = ()=>{
->>>>>>> origin/main
     return(
         <>
             <Landing />
@@ -39,13 +35,10 @@ const Home: React.FC = ()=>{
             <PrivateHome />
             <OtherHome />
             <Accepted />
-<<<<<<< HEAD
             <Link to={data?.whatsapp??""} className="whatsapp">
                 <FontAwesomeIcon icon={faSquareWhatsapp} style={{color: "#6ada5f",}} />
             </Link>
             
-=======
->>>>>>> origin/main
         </>
     )
 }

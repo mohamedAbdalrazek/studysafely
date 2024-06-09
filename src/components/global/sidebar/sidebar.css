@@ -47,9 +47,6 @@
 }
 /* -------------------------------------------------------------- */
 
-.side-uni{
-
-}
 .side-uni > a{
     background-color: var(--main-gray);
     padding: 5px;

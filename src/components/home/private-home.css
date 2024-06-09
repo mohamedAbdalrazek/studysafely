@@ -6,11 +6,7 @@
     padding-top: var(--section-padding);
     padding-bottom: var(--section-padding);
     background-color: var(--light);
-<<<<<<< HEAD
     height: calc(100vh - var(--nav-height));
-=======
-    height: calc(100vh - var(--nav-height) - 2* var(--section-padding));
->>>>>>> origin/main
 }
 
 .private-home .content{
@@ -50,7 +46,6 @@
 .private-home .content .right img{
     width: 75%;
     
-<<<<<<< HEAD
 }
 @media (max-width: 768px){
     .private-home{
@@ -89,6 +84,4 @@
     .private-home .content .right img{
         width: 100%;
     }
-=======
->>>>>>> origin/main
 }

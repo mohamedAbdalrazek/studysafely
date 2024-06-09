@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
-import React, { useRef, useState } from "react";
->>>>>>> origin/main
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 

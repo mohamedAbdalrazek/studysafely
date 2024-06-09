@@ -1,7 +1,3 @@
-import { collection, doc, onSnapshot } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { db } from "../../api/firestore";
-import { Link } from "react-router-dom";
 import SidePrivate from "./sidebar/SidePrivate";
 import SidePublic from "./sidebar/SidePublic";
 import SideNews from "./sidebar/SideNews";

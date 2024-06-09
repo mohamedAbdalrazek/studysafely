@@ -1,5 +1,5 @@
 import { collection, doc, onSnapshot } from "firebase/firestore";
-import { Children, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { db } from "../../../api/firestore";
 import { Link } from "react-router-dom";
 interface paramtersMap {

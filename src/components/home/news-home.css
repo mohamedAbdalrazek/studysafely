@@ -13,20 +13,10 @@
 }
 .news-home .swiper-slide a {
     margin-top: 50px;
-<<<<<<< HEAD
     transition: all 0.3s;
     background-color: var(--main-gray);
     border-radius: 10px;
     width: 90%;
-=======
-
-    transition: all 0.3s;
-    background-color: var(--main-gray);
-    border-radius: 10px;
-
-    width: 90%;
-
->>>>>>> origin/main
     display: flex;
     gap: 20px;
     justify-content: space-between;
@@ -84,7 +74,6 @@
     position: static;
     margin-top: 20px;
 }
-<<<<<<< HEAD
 @media (max-width: 657px) {
     .news-home .swiper-slide a .left{
         display: none;
@@ -103,5 +92,3 @@
         min-height: 100%;
     }
 }
-=======
->>>>>>> origin/main
