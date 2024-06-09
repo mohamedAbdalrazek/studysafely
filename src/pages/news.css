@@ -79,3 +79,27 @@
     background-color: var(--sub-dark);
     color: white;
 }
+@media (min-width: 769px) and (max-width: 1024px){
+    .news .news-list .right{
+        width: 25%;
+    }
+    .news .news-list .news-element .left h3{
+        font-size: 18px;
+    }
+}
+@media (max-width: 768px){
+    .news .news-list .news-element .left h3{
+        font-size: 18px;
+    }
+    .news .news-list .right{
+        width: 30%;
+    }
+}
+@media (max-width: 410px){
+    .news .news-list .news-element .left{
+        width: 100%;
+    }
+    .news .news-list .right{
+        display: none;
+    }
+}

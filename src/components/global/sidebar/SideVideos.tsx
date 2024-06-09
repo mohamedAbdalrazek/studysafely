@@ -27,7 +27,25 @@ const SideVideos = () => {
             setVideosList(data);
         });
     }, []);
-    const videosELement = videosList?.map((video) => {
+    function getRandomElements(arr: VideosMap[] | undefined) {
+        if (arr === undefined) {
+            return;
+        }
+        if (arr.length < 2) {
+            return [arr[0]];
+        }
+
+        const index1 = Math.floor(Math.random() * arr.length);
+
+        let index2;
+        do {
+            index2 = Math.floor(Math.random() * arr.length);
+        } while (index2 === index1);
+
+        // Return the two elements
+        return [arr[index1], arr[index2]];
+    }
+    const videosELement = getRandomElements(videosList)?.map((video) => {
         const url:string = video.videoName.replace(/ /g, "-")
 
         return (

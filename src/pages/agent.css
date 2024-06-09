@@ -28,4 +28,19 @@
     width: 60%;
     text-align: right;
 }
-
+@media (max-width: 1024px){
+    .agent .container{
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    .agent .content{
+        flex-direction: column;
+        
+    }
+    .agent .content .video{
+        width: 85%;
+    }
+    .agent .content .body{
+        width: 100%;
+    }
+}

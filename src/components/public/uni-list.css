@@ -74,3 +74,57 @@
     width: 100%;
     margin-right: 10px;
 }
+@media (min-width: 769px) and (max-width: 1024px){
+    .public-uni-list .list .uni .text{
+        width: 70%;
+    }
+    .public-uni-list .list .uni p{
+        font-size: 14px;
+        font-weight: 400;
+    }
+}
+@media (max-width: 768px) {
+    .public-uni-list .list .uni .background{
+        display: none;
+    }
+    .public-uni-list .list .uni .text{
+        width: 70%;
+
+    }
+    .public-uni-list .list .uni{
+        padding-left: 10px;
+        overflow: auto;
+    }
+    .public-uni-list .list .uni p{
+        font-size: 14px;
+        font-weight: 400;
+    }
+    .public-uni-list{
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+}
+@media (max-width: 430px){
+    .public-uni-list .list .uni{
+        flex-direction: column-reverse;
+        align-items: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        overflow: visible;
+        min-height:fit-content;
+        text-align: center;
+        height: fit-content;
+    }
+    .public-uni-list .list .uni .logo{
+        width: 40%;
+    }
+    .public-uni-list .list .uni p{
+        text-align: center;
+    }
+    .public-uni-list .list .uni .text h3{
+        font-size: 22px;
+    }
+    .public-uni-list .list .uni span{
+        font-size: 12px;
+    }
+}

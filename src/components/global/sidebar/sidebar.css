@@ -124,3 +124,31 @@
     text-align: right;
     margin-left: auto;
 }
+@media (min-width: 769px) and (max-width: 1024px){
+    .side-header{
+        font-size: 14px;
+    }
+
+    .side-uni .image{
+        display: none;
+    }
+    .side-uni .content h3{
+        font-weight: 600;
+    }
+    .side-uni .content{
+        padding-left: 2px;
+        padding-top: 5px;
+    }
+    .side-news > a .image{
+        display: none;
+    }
+    .side-news > a .content{
+        width: 100%;
+    }
+}
+@media (max-width: 768px) {
+    .partial{
+        padding-bottom: var(--section-padding);
+    }
+    
+}
