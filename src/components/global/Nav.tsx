@@ -40,8 +40,8 @@ const Nav = () => {
                 </div>
 
                 <div>
-                    <Link to="apply">
-                        <button className="global-btn">{links.button}</button>
+                    <Link to="apply" className="global-btn">
+                        {links.button}
                     </Link>
                 </div>
             </div>

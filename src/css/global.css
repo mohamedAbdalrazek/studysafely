@@ -60,13 +60,12 @@
     box-sizing: content-box;
 }
 .global-btn {
+    text-decoration: none;
     background-color: var(--light);
     border: 1px solid var(--main-dark);
-    padding: 10px 25px;
+    padding: 10px 20px;
     transition: all 0.3s;
-    cursor: pointer;
-    font-weight: 700;
-    outline: none;
+    font-weight: 600;
     border-radius: 5px;
     color: var(--main-dark);
 }

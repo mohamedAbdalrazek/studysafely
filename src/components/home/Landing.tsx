@@ -33,7 +33,7 @@ const Landing:React.FC  = ()=>{
                 <p>
                     {landingData.subHeader}
                 </p>
-                <Link to="apply"> <button className="global-btn">{landingData.button}</button></Link>
+                <Link to="apply" className="global-btn">{landingData.button}</Link>
             </div>
         </div>
     )

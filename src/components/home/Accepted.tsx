@@ -28,6 +28,8 @@ const Accepted: React.FC = () => {
         header: string;
     }
     const [accptedHome, setAcceptedHome] = useState<acceptedHomeMap>();
+    const widthCheck = (window.innerWidth) <  768;
+    console.log(widthCheck)
     useEffect(() => {
         // getting the accepted data related to the home page
         const fetchDataHome = async () => {
@@ -53,13 +55,13 @@ const Accepted: React.FC = () => {
                 <div className="accepted-list">
                     <Swiper
                         zoom={true}
-                        effect={"coverflow"}
+                        effect={!widthCheck ?"coverflow":""}
                         autoplay={{
                             delay: 5000,
                             disableOnInteraction: true,
                             pauseOnMouseEnter: true,
                         }}
-                        slidesPerView={3}
+                        slidesPerView={!widthCheck ? 3:1}
                         grabCursor={true}
                         centeredSlides={true}
                         slideToClickedSlide={true}
@@ -74,6 +76,7 @@ const Accepted: React.FC = () => {
                         pagination={{
                             clickable: true,
                         }}
+                        // navigation={widthCheck}
                         modules={[EffectCoverflow, Pagination, Zoom]}
                         className="mySwiper"
                     >

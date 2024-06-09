@@ -38,4 +38,12 @@
     width: 100%;
     height: 100%;
 }
-
+@media (max-width: 767px){
+    .accepted-home .special-header{
+        font-size: 38px;
+    }
+    .accepted-home .swiper .swiper-slide img{
+        width: 90% !important;
+    }
+    
+}

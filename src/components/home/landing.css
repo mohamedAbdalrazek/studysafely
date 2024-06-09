@@ -21,10 +21,10 @@
     margin: auto;
     color: var(--light);
     line-height: 28px;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 .landing .content .global-btn{
-    font-size: 15px;
+    font-size: 16px;
     background-color: transparent;
     color: var(--light);
     border-color: var(--light);

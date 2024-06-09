@@ -17,6 +17,7 @@ import Other from "./pages/Other";
 import PrivateMain from "./components/private/private-page/PrivateMain"
 import PrivatePartial from "./components/private/private-page/PrivatePartial"
 import PublicPage from "./pages/PublicPage";
+import Footer from "./components/global/Footer";
 
 function App() {
     return (
@@ -41,6 +42,7 @@ function App() {
                 <Route element={<Other />} path="/:id" />
 
             </Routes>
+            <Footer />
         </BrowserRouter>
     );
 }
