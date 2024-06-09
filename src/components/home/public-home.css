@@ -2,14 +2,21 @@
     padding-top: var(--section-padding);
     padding-bottom: var(--section-padding);
     background-color: var(--main-gray);
+<<<<<<< HEAD
     height: calc(100vh - var(--nav-height) );
+=======
+    height: calc(100vh - var(--nav-height) - 2 * var(--section-padding));
+>>>>>>> origin/main
     display: flex;
     width: 100%;
     align-items: center;
 }
+<<<<<<< HEAD
 @media (max-width: 768px){
     .public-home{
         height: auto;
     }
 }
 
+=======
+>>>>>>> origin/main

@@ -37,6 +37,7 @@
     position: static;
     margin-top: 20px;
 }
+<<<<<<< HEAD
 @media (max-width: 768px){
     .slider .left{
         display: none;
@@ -60,3 +61,5 @@
         margin-bottom: 25px;
     }
 }
+=======
+>>>>>>> origin/main

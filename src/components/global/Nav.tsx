@@ -4,9 +4,13 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./nav.css";
 import besideLogo from "../../assets/images/beside.png";
+<<<<<<< HEAD
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 const Nav = () => {
+=======
+const Nav: React.FC = () => {
+>>>>>>> origin/main
     interface LinkMap {
         [key: string]: string;
     }
@@ -14,21 +18,36 @@ const Nav = () => {
         [key: string]: any;
     }
     const [links, setLinks] = useState<LinkMap>({});
+<<<<<<< HEAD
     const [isOpen, setIsOpen] = useState(false)
     useEffect(() => {
         const docRef = doc(collection(db, "global"), "nav");
         getDoc(docRef).then((res: paramtersMap): void => {
             const data = res.data();
             setLinks(data);
+=======
+    useEffect(() => {
+        const docRef = doc(collection(db, "global"), "nav");
+        getDoc(docRef).then((res: paramtersMap): void => {
+            const date = res.data();
+            setLinks(date);
+>>>>>>> origin/main
         });
     }, []);
     return (
         <div className="nav">
+<<<<<<< HEAD
             <Link className="logo" to="/">
                 <img src={besideLogo} alt="" />
             </Link>
             <div className={`left ${isOpen?"open":""}`}>
                 <FontAwesomeIcon icon={faCircleXmark} className="close" onClick={()=>setIsOpen(false)} />
+=======
+            <div className="container">
+                <Link className="logo" to="/">
+                    <img src={besideLogo} alt="" />
+                </Link>
+>>>>>>> origin/main
                 <div className="links">
                     <Link to="/">{links.home}</Link>
                     <Link to="private">{links.private}</Link>
@@ -45,7 +64,10 @@ const Nav = () => {
                     </Link>
                 </div>
             </div>
+<<<<<<< HEAD
             <FontAwesomeIcon icon={faBars} className="expend" onClick={()=>setIsOpen(true)} />
+=======
+>>>>>>> origin/main
         </div>
     );
 };

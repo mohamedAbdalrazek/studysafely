@@ -4,8 +4,11 @@ import { useEffect, useState } from "react"
 import { collection, doc, onSnapshot, query, where } from "firebase/firestore"
 import { db } from "../api/firestore"
 import SideBar from "../components/global/SideBar"
+<<<<<<< HEAD
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSquareWhatsapp } from "@fortawesome/free-brands-svg-icons"
+=======
+>>>>>>> origin/main
 interface UniMap {
     body: string;
     fee: number;
@@ -25,7 +28,11 @@ interface UniMap {
     logoUrl: string;
     name: string;
     studentsNumber: number;
+<<<<<<< HEAD
     whatsapp: string;
+=======
+    whatsLink: string;
+>>>>>>> origin/main
 }
 interface paramtersMap {
     [key: string]: any;
@@ -71,9 +78,12 @@ const PrivatePage = ()=>{
                     <SideBar root="private" filter={uni?.name} />
                 </div>
             </div>
+<<<<<<< HEAD
             <Link to={uni?.whatsapp??""} className="whatsapp">
                 <FontAwesomeIcon icon={faSquareWhatsapp} style={{color: "#6ada5f",}} />
             </Link>
+=======
+>>>>>>> origin/main
         </div>
     )
 }

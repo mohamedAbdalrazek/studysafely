@@ -5,8 +5,11 @@ import { useEffect, useState } from "react";
 import parse from 'html-react-parser';
 import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
+<<<<<<< HEAD
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareWhatsapp } from "@fortawesome/free-brands-svg-icons";
+=======
+>>>>>>> origin/main
 interface AgentMap {
     [key: string]: string;
 }
@@ -54,9 +57,12 @@ const Agent = ()=>{
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
             <Link to={agentData?.whatsapp??""} className="whatsapp">
                 <FontAwesomeIcon icon={faSquareWhatsapp} style={{color: "#6ada5f",}} />
             </Link>
+=======
+>>>>>>> origin/main
         </div>
     )
 }

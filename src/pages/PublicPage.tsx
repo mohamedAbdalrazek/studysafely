@@ -14,8 +14,11 @@ import {
 import { db } from "../api/firestore";
 import SideBar from "../components/global/SideBar";
 import ImageSlider from "../components/global/ImagesSlider";
+<<<<<<< HEAD
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareWhatsapp } from "@fortawesome/free-brands-svg-icons";
+=======
+>>>>>>> origin/main
 interface UniMap {
     body: string;
     fee: number;
@@ -35,7 +38,11 @@ interface UniMap {
     logoUrl: string;
     name: string;
     studentsNumber: number;
+<<<<<<< HEAD
     whatsapp: string;
+=======
+    whatsLink: string;
+>>>>>>> origin/main
 }
 interface paramtersMap {
     [key: string]: any;
@@ -113,22 +120,35 @@ const PublicPage = () => {
                             </h3>
                             <ImageSlider images={uni?.imagesList} />
                         </div>
+<<<<<<< HEAD
                     ) : undefined}
                     <div className="body">{uni?.body && parse(uni?.body)}</div>
                     {uni?.fieldsList.length ? (
+=======
+                    ):undefined}
+                    <div className="body">{uni?.body && parse(uni?.body)}</div>
+                    {uni?.fieldsList.length? (
+>>>>>>> origin/main
                         <div className="fields">
                             <h3 className="special-sub-header">التخصصات</h3>
                             <div className="fields-list">{fieldsList}</div>
                         </div>
+<<<<<<< HEAD
                     ) : undefined}
+=======
+                    ):undefined}
+>>>>>>> origin/main
                 </div>
                 <div className="right-section">
                     <SideBar root="public" filter={uni?.name} />
                 </div>
             </div>
+<<<<<<< HEAD
             <Link to={uni?.whatsapp??""} className="whatsapp">
                 <FontAwesomeIcon icon={faSquareWhatsapp} style={{color: "#6ada5f",}} />
             </Link>
+=======
+>>>>>>> origin/main
         </div>
     );
 };

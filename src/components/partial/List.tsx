@@ -26,6 +26,10 @@ interface ScholarListMap {
 const List = (children:childrenMap)=>{
     const [scholarList, setScholarList] = useState<ScholarListMap[]>([]);
     useEffect(() => {
+<<<<<<< HEAD
+=======
+        
+>>>>>>> origin/main
         const scholarListRef = children.listRef
         onSnapshot(scholarListRef, (res: paramtersMap): void => {
             const scholarData: ScholarListMap[] = res.docs.map((doc: any) => ({
@@ -38,7 +42,10 @@ const List = (children:childrenMap)=>{
     const scholarListElement = scholarList.map((scholar)=>{
         const hashtagesArray = scholar.hashtages.split(".");
         const url:string = scholar.mainInfo.replace(/ /g, "-")
+<<<<<<< HEAD
         const urlName:string = scholar.uniName.replace(/ /g, "-")
+=======
+>>>>>>> origin/main
         return(
             <div className="scholar">
                 <div className="content">
@@ -47,7 +54,11 @@ const List = (children:childrenMap)=>{
                     </h3>
                     <div className="sub-info">
                         <div className="left">
+<<<<<<< HEAD
                             <Link to={`/partial/${url}+${urlName}`} className="global-btn">اقرأ المزيد</Link>
+=======
+                            <Link to={"/partial/"+url} className="global-btn">اقرأ المزيد</Link>
+>>>>>>> origin/main
                             <a  href={scholar.buttonLink} className="global-btn">{scholar.buttonText}</a>
                         </div>
                         <div className="right">

@@ -34,7 +34,10 @@ const VideosSlider = (children: chidrenMap) => {
                             <img src={icon} alt="" className="icon" />
                         </div>
                         <h3>{video.videoName}</h3>
+<<<<<<< HEAD
                         <span className="date">{video.date}</span>
+=======
+>>>>>>> origin/main
                     </Link>
                 </SwiperSlide>
                 <SwiperSlide key={video.videoName} className="video-box">

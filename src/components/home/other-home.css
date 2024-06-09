@@ -51,6 +51,7 @@
     top: 0;
     left: 0;
     z-index: 1;
+<<<<<<< HEAD
 }
 @media (max-width: 599px){
     .other-home .list a{
@@ -61,4 +62,6 @@
     .other-home .list{
         width: 90%;
     }
+=======
+>>>>>>> origin/main
 }

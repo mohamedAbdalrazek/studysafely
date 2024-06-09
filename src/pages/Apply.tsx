@@ -12,8 +12,11 @@ import { useEffect, useState } from "react";
 import "./apply.css";
 import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
+<<<<<<< HEAD
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareWhatsapp } from "@fortawesome/free-brands-svg-icons";
+=======
+>>>>>>> origin/main
 const Apply: React.FC = () => {
     interface ApplyMap {
         [key: string]: string;
@@ -67,9 +70,12 @@ const Apply: React.FC = () => {
                     <Link to={"/partial"}>المنح الجزئية</Link>
                 </div>
             </div>
+<<<<<<< HEAD
             <Link to={applyData?.whatsapp??""} className="whatsapp">
                 <FontAwesomeIcon icon={faSquareWhatsapp} style={{color: "#6ada5f",}} />
             </Link>
+=======
+>>>>>>> origin/main
         </div>
     );
 };
