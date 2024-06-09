@@ -94,3 +94,23 @@
 .uni-list .list .uni .uni-info .sub-info span:last-of-type::before{
     content: '$';
 }
+@media (min-width: 320px){
+    
+}
+@media (max-width: 768px) {
+    .uni-list .list{
+        padding-right: 10px;
+        padding: 10px;
+    }
+    .uni-list .list .uni{
+        width: calc(100%);
+        height: max-content;
+        padding-bottom: 20px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px){
+    .uni-list .list .uni{
+        width: calc(100% /  2 - 20px);
+    }
+}

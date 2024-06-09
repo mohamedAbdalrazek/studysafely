@@ -44,7 +44,6 @@
 
 .videos-slider .video-box .video-container .icon{
     position: absolute;
-
     top: 50%;
     left: 50%;
     width: 25%;
@@ -98,4 +97,17 @@
 }
 .swiper-nav-btns span:last-of-type{
     right: 10px;
+}
+
+@media (max-width: 991px) {
+    .videos-slider .video-box{
+        width: calc(100% / 2 - 40px ) !important;
+    }
+}
+@media (max-width: 768px) {
+    .videos-slider .video-box{
+        width: calc(100% - 40px ) !important;
+        height: max-content;
+        padding-bottom: 20px;
+    }
 }

@@ -52,3 +52,44 @@
 .apply .links a:hover{
     transform: scale(1.02);
 }
+@media (max-width: 500px){
+    .apply .links{
+        flex-direction: column;
+        align-items: center;
+    }
+    .apply .links a{
+        width: 50%;
+        text-align: center;
+    }
+}
+@media (max-width: 768px){
+    .apply .content{
+        flex-direction: column;
+    }
+    .apply .content > div{
+        width: 95% !important;
+    }
+    .apply .content .right{
+        text-align: center;
+    }
+    .apply .links{
+        gap: 10px;
+        width: 90%;
+        margin: auto;
+    }
+    .apply .links a{
+        min-width: fit-content;
+        padding: 10px 20px;
+    }
+}
+@media (min-width: 769px) and (max-width: 1024px){
+    .apply .content .right h1{
+        font-size: 33px;
+    }
+    .apply .content .right p{
+        font-size: 16px;
+    }
+    .apply .content .left{
+        width: 50%;
+    }
+}

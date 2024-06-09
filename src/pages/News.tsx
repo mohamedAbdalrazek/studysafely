@@ -26,7 +26,7 @@ interface newsListMap {
     title: string;
 }
 const News: React.FC = () => {
-    let [searchParams, setSearchParams]: [URLSearchParams, Function] =
+    const [searchParams, setSearchParams]: [URLSearchParams, Function] =
         useSearchParams();
     const [pageData, setPageData] = useState<pageDataMap>();
     const [newsList, setNewsList] = useState<newsListMap[]>([]);

@@ -19,8 +19,12 @@ interface chidrenMap {
     videosList: { [key: string]: string }[] | undefined;
 }
 const VideosSlider = (children: chidrenMap) => {
+    const viewWidth = window.innerWidth
+    const checkTwo = viewWidth < 992
+    const checkOne = viewWidth < 768
+    const videosPerSlide = !checkTwo ? 3 : checkOne ? 1 : 2  
     const videosListElement = children.videosList?.map((video) => {
-        const url:string = video.videoName.replace(/ /g, "-")
+        const url: string = video.videoName.replace(/ /g, "-");
         return (
             <>
                 <SwiperSlide key={video.videoName} className="video-box">
@@ -109,7 +113,7 @@ const VideosSlider = (children: chidrenMap) => {
         <Swiper
             modules={[Navigation, A11y]}
             spaceBetween={0}
-            slidesPerView={3}
+            slidesPerView={videosPerSlide}
             className="videos-slider"
         >
             {videosListElement}
