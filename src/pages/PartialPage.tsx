@@ -92,7 +92,7 @@ const PartialPage = ()=>{
                                 <img src={scholar?.logoUrl} alt={scholar?.logoName} />
                             </div>
                             <div className="info">
-                                <span>
+                                <span className="partial-location">
                                     location:{uni?.location}
                                 </span>
                                 <span>

@@ -146,9 +146,4 @@
         width: 100%;
     }
 }
-@media (max-width: 768px) {
-    .partial{
-        padding-bottom: var(--section-padding);
-    }
-    
-}
+

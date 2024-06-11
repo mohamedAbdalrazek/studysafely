@@ -2,7 +2,7 @@
     padding-top: calc(var(--nav-height) + var(--section-padding));
 }
 .video-page .left-section .video{
-    width: 70%;
+    width: 90% !important;
     margin: auto;
     margin-bottom: 20px;
 }
@@ -79,4 +79,31 @@
     width: 90%;
     margin-left: auto;
     margin-bottom: 5px;
+}
+@media (max-width: 1024px){
+    .video-page .left-section .other-videos .latest-videos{
+        flex-wrap: wrap;
+    }
+    .video-page .left-section .other-videos .latest-videos a{
+        width: calc(50% - 10px);
+    }
+}
+@media (max-width: 540px){
+    .video-page .left-section .buttons{
+        gap: 10px;
+        max-width: 100%;
+    }
+    .video-page .left-section .buttons a{
+        min-width: fit-content;
+        max-width: 50% !important;
+        padding: 10px;
+        font-size: 14px;
+    }
+    .video-page .left-section .other-videos .latest-videos{
+        gap: 0;
+    }
+    .video-page .left-section .other-videos .latest-videos a{
+        width: 100%;
+        margin-bottom: 20px;
+    }
 }

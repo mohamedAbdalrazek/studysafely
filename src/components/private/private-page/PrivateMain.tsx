@@ -84,7 +84,11 @@ const PrivateMain = () => {
             <div className="body">{uni?.body && parse(uni?.body)}</div>
             <div className="fields">
                 <h3 className="special-sub-header">التخصصات</h3>
-                <div className="fields-list">{fieldsList}</div>
+                <div className="fields-list">
+                    {fieldsList}
+                    {fieldsList}
+                    {fieldsList}
+                </div>
             </div>
         </div>
     );
