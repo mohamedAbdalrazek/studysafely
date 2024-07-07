@@ -155,6 +155,7 @@ const EditPartialScholar = () => {
             <input
                 id="priceBefore"
                 type="number"
+                min="0"
                 defaultValue={scholar?.priceBefore}
                 {...register("priceBefore", { required: true })}
                 placeholder="Price Before"
@@ -171,6 +172,7 @@ const EditPartialScholar = () => {
                 id="priceAfter"
                 defaultValue={scholar?.priceAfter}
                 type="number"
+                min="0"
                 {...register("priceAfter", { required: true })}
                 placeholder="Price after"
                 className="admin-input"

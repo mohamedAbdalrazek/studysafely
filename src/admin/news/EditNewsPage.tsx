@@ -79,6 +79,7 @@ const EditNewsPage = () => {
             <input
                 id="number"
                 type="number"
+                min="0"
                 defaultValue={data?.number}
                 {...register("number", { required: true })}
                 placeholder="Number"

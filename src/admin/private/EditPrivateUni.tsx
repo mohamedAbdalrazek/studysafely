@@ -208,6 +208,7 @@ const EditPrivateUni = () => {
             </label>
             <input
                 id="fee"
+                min="0"
                 type="number"
                 defaultValue={uni?.fee}
                 {...register("fee", { required: true })}
@@ -225,6 +226,7 @@ const EditPrivateUni = () => {
             <input
                 id="studentsNumber"
                 type="number"
+                min="0"
                 defaultValue={uni?.studentsNumber}
                 {...register("studentsNumber", { required: true })}
                 placeholder="Number of students"

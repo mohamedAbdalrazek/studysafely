@@ -85,8 +85,6 @@ const PrivateMain = () => {
                 <h3 className="special-sub-header">التخصصات</h3>
                 <div className="fields-list">
                     {fieldsList}
-                    {fieldsList}
-                    {fieldsList}
                 </div>
             </div>
         </div>

@@ -1,0 +1,22 @@
+.error{
+    background: linear-gradient(0deg, #013e43ee 0%, #295c51ee 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+.error-image{
+    width: 40%;
+    margin-bottom: 70px;
+}
+.error-image img{
+    width: 100%;
+}
+.error-button a{
+    color: white;
+    background-color: #020302;
+    padding: 15px 40px;
+    text-decoration: none;
+    font-size: 18px;
+}

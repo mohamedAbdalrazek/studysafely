@@ -178,6 +178,7 @@ const AddPublicUni = () => {
             <input
                 id="fee"
                 type="number"
+                min="0"
                 {...register("fee", { required: true })}
                 placeholder="fee"
                 className="admin-input"
@@ -193,6 +194,7 @@ const AddPublicUni = () => {
             <input
                 id="studentsNumber"
                 type="number"
+                min="0"
                 {...register("studentsNumber", { required: true })}
                 placeholder="Number of students"
                 className="admin-input"

@@ -4,7 +4,7 @@ import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
 import parse from "html-react-parser";
 
 import { db } from "../api/firestore";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import ReactPlayer from "react-player";
 import ImageSlider from "../components/global/ImagesSlider";
 interface paramtersMap {
@@ -24,16 +24,20 @@ const Other = () => {
     );
     const [pageData, setPageData] = useState<pageDataMap>();
     const [video, setVideo] = useState<VideoMap>({});
-
+    const [notFound, setNotFound] = useState(false);
     useEffect(() => {
         const collectionRef = collection(db, "other");
         const q = query(collectionRef, where("name", "==", location));
+        
         onSnapshot(q, (res: paramtersMap): void => {
             const data: pageDataMap[] = res.docs.map((doc: any) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
             setPageData(data[0]);
+            if (!data[0]) {
+                setNotFound(true);
+            }
         });
         const videoRef = collection(
             doc(collection(db, "videos"), "allVideos"),
@@ -47,7 +51,11 @@ const Other = () => {
             }));
             setVideo(videos[0]);
         });
-    }, []);
+
+    }, [location]);
+    if (notFound) {
+        return <Navigate to="/error" />;
+    }
     return (
         <div className="other">
             <div className="container">

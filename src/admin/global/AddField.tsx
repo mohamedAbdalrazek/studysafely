@@ -97,6 +97,7 @@ const AddField: React.FC<FieldFormProps> = ({ onSave, onClose }) => {
                 <input
                     id="fee"
                     type="number"
+                    min="0"
                     name="fee"
                     value={fieldData.fee.toString()}
                     onChange={handleChange}
@@ -115,6 +116,7 @@ const AddField: React.FC<FieldFormProps> = ({ onSave, onClose }) => {
                 <input
                     id="duration"
                     type="number"
+                    min="0"
                     name="duration"
                     value={fieldData.duration.toString()}
                     onChange={handleChange}

@@ -198,6 +198,7 @@ const EditPartialPage = () => {
                 id="listNumber"
                 defaultValue={data?.listNumber}
                 type="number"
+                min="0"
                 {...register("listNumber", { required: true })}
                 placeholder="Number"
                 className="admin-input"

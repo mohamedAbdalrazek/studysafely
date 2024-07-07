@@ -50,6 +50,7 @@ import EditVideos from "./admin/global/EditVideos";
 import AddNewVideo from "./admin/global/AddNewVideo";
 import AddAcceptedImage from "../src/admin/home/AddAcceptedImage"
 import Login from "./admin/Login";
+import Error from "./components/global/Error"
 function App() {
     return (
         <BrowserRouter>
@@ -88,6 +89,8 @@ function App() {
                     <Route element={<EditAgentPage />} path="agent"/>
                 </Route>
                 <Route element={<Login />} path="/d6d66900-6993-4ed4-b914-55dbdbae0e78"/>
+                <Route path="/error" element={<Error />} />
+
                 <Route element={<Layout />} path="/">
                     <Route element={<Home />} index />
                     <Route element={<Apply />} path="apply" />
@@ -106,6 +109,7 @@ function App() {
                     <Route element={<Agent />} path="agent" />
                     <Route element={<Other />} path="/:id" />
                 </Route>
+                <Route path="*" element={<Error />} />
             </Routes>
         </BrowserRouter>
     );

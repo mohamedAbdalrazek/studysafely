@@ -84,7 +84,7 @@ const AddPartialScholar = () => {
         );
         await addDoc(docRef, formedData);
         setSending(false);
-        navigate("/4ebdeab6-4058-4671-942a-258434abb061/public-list");
+        navigate("/4ebdeab6-4058-4671-942a-258434abb061/partial-list");
     };
     return (
         <form onSubmit={handleSubmit(onParentSubmit)}>
@@ -145,6 +145,7 @@ const AddPartialScholar = () => {
             <input
                 id="priceBefore"
                 type="number"
+                min="0"
                 {...register("priceBefore", { required: true })}
                 placeholder="Price Before"
                 className="admin-input"
@@ -159,6 +160,7 @@ const AddPartialScholar = () => {
             <input
                 id="priceAfter"
                 type="number"
+                min="0"
                 {...register("priceAfter", { required: true })}
                 placeholder="Price after"
                 className="admin-input"

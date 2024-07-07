@@ -63,7 +63,7 @@ const EditNewsHome = () => {
             {/* ---------------------------------------------------------------------------------- */}
 
             <label htmlFor="numberOfNews" className="admin-label">Number of News at home page</label>
-            <input id="subHeader" defaultValue={data?.numberOfNews} type="number"  {...register("numberOfNews", { required: true })} placeholder="News Number" className="admin-input"/>
+            <input id="numberOfNews" defaultValue={data?.numberOfNews} type="number"  min="0" {...register("numberOfNews", { required: true })} placeholder="News Number" className="admin-input"/>
             {errors.numberOfNews && <p className="admin-error">Number of News is required</p>}
             {/* ---------------------------------------------------------------------------------- */}
             <button type="submit" className="admin-button">Submit</button>
