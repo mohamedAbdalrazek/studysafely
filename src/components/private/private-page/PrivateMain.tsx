@@ -66,7 +66,6 @@ const PrivateMain = () => {
             </div>
         )
     })
-    console.log(uni);
     return (
         <div>
             <div className="main-info">

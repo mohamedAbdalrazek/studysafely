@@ -2,6 +2,9 @@
     padding-top: calc(var(--nav-height) + var(--section-padding));
     padding-bottom: var(--section-padding);
     background-color: white;
+    min-height: calc(100vh);
+    display: flex;
+    align-items: center;
 }
 
 .apply .content{

@@ -18,7 +18,6 @@ const VideoPage = () => {
     const location = decodeURIComponent(
         useLocation().pathname.split("/")[2].split("-").join(" ")
     );
-    // console.log(location);
     const [videosList, setVideosList] = useState<VideoMap[]>([{}]);
     useEffect(() => {
         const videoRef = collection(

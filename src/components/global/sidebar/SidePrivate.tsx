@@ -66,7 +66,6 @@ const SidePrivate = (children: children) => {
     const filteredList = getRandomElemnts(
         privateUniList?.filter((uni) => uni.name != children.filter)
     );
-    console.log(children.filter)
     const listElement = filteredList?.map((uni) => {
         const url: string = uni?.name.replace(/ /g, "-");
         return (

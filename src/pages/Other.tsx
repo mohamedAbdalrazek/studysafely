@@ -22,7 +22,6 @@ const Other = () => {
     const location = decodeURIComponent(
         useLocation().pathname.split("/")[1].split("-").join(" ")
     );
-    console.log(location);
     const [pageData, setPageData] = useState<pageDataMap>();
     const [video, setVideo] = useState<VideoMap>({});
 
@@ -49,8 +48,6 @@ const Other = () => {
             setVideo(videos[0]);
         });
     }, []);
-    console.log(pageData);
-    console.log(video);
     return (
         <div className="other">
             <div className="container">

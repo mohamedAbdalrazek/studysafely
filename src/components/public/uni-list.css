@@ -1,5 +1,5 @@
 .public-uni-list{
-    padding-top: 40px;
+    /* padding-top: 40px; */
     padding-bottom: 40px;
 }
 .public-uni-list h1{
@@ -52,6 +52,7 @@
 }
 .public-uni-list .list .uni .text{
     color: var(--sub-dark);
+    width: 120%;
 }
 .public-uni-list .list .uni .text h3{
     font-size: 26px;

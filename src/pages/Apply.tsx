@@ -7,7 +7,7 @@ import {
     where,
 } from "firebase/firestore";
 import { db } from "../api/firestore";
-import { useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 
 import "./apply.css";
 import { Link } from "react-router-dom";
@@ -30,8 +30,8 @@ const Apply: React.FC = () => {
             setApplyData(date);
         });
         const videoRef = collection(
-            doc(collection(db, "videos"), "other"),
-            "videosList"
+            doc(collection(db, "videos"), "allVideos"),
+            "allVideos"
         );
         const q = query(videoRef, where("domain", "==", "apply"));
         onSnapshot(q, (res: paramtersMap): void => {
@@ -43,20 +43,25 @@ const Apply: React.FC = () => {
             setVideo(videos[0]);
         });
     }, []);
+    const conditionalStyle:CSSProperties = {
+        width: "100%",
+        textAlign: "center",
+    };
 
     return (
         <div className="apply">
             <div className="container">
                 <div className="content">
-                    <div className="left">
+
+                    {video!= undefined &&<div className="left">
                         <ReactPlayer
-                            url={video.videoUrl}
+                            url={video?.videoUrl}
                             controls={true}
                             width={"100%"}
                             height={"auto"}
                         />
-                    </div>
-                    <div className="right">
+                    </div>}
+                    <div className="right" style={video==undefined ? conditionalStyle : {}}>
                         <h1>{applyData.title}</h1>
                         <p>{applyData.subTitle}</p>
                     </div>

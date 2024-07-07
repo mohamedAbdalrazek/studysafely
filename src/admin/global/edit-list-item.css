@@ -1,0 +1,86 @@
+.admin-item{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+    background-color: #1F2A40;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.admin-item .admin-item-name{
+    font-size: 18px;
+    width: 80%;
+    word-wrap:break-word;
+}
+.admin-item .admin-item-options{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.admin-item .admin-item-options .admin-item-edit{
+    text-decoration: none;
+    color: white;
+    font-size: 22px;
+    transition: .3s all;
+}
+.admin-item .admin-item-options .admin-item-edit:hover,
+.admin-item .admin-item-options .admin-item-delete:hover{
+    transform: scale(1.1);
+}
+.admin-item .admin-item-options .admin-item-delete{
+    cursor: pointer;
+    transition: .3s all;
+    color: red;
+    font-size: 22px;
+}
+.popup-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 100;
+    background-color: rgba(0,0,0,.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.popup-overlay .popup{
+    text-align: center;
+    width: 50%;
+    background-color: #1F2A40;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 40px;
+    border-radius: 10px;
+}
+.popup-overlay .popup p{
+    font-size: 22px;
+}
+.popup-overlay .popup button{
+    background-color: transparent;
+    font-size: 18px;
+    color: white;
+    border: 1px solid white;
+    padding: 10px 20px;
+    margin-left: 20px;
+    cursor: pointer;
+
+    transition: all .3s;
+    border-radius: 5px;
+}
+.popup-overlay .popup button:hover{
+    transform: scale(1.05);
+}
+.popup-overlay .popup button:first-child{
+    background-color: red;
+    border-color: red;
+}
+.popup-overlay .popup button:last-child{
+    background-color: rgb(31, 182, 182);
+    border-color:rgb(31, 182, 182) ;
+}

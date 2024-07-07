@@ -54,17 +54,16 @@ const News: React.FC = () => {
             setNewsList(newsData);
         })
     },[]);
-    // const pageDataNumber:number = pageData ? pageData.number : 0;
     const page = searchParams.get("page");
     const firstIndex = page ? (parseInt(page)-1)*pageDataNumber: 0;
     const lastIndex = firstIndex?(firstIndex+ pageDataNumber):pageDataNumber
-    // console.log(firstIndex, lastIndex)
     const newsListElement = newsList.slice(firstIndex, lastIndex).map((news) => {
+        const url = news.parentDomain == "other"?news.subDomain : `${news.parentDomain}/${news.subDomain}`
         return (
             <Link
                 key={news.sortDate}
                 className="news-element"
-                to={`/${news.parentDomain}/${news.subDomain}`}
+                to={`/${url}`}
             >
                 <div className="left">
                     <h3>{news?.title}</h3>
@@ -85,9 +84,7 @@ const News: React.FC = () => {
             </Link>
         );
     });
-    // console.log(pagesNumberArray)
     const pagesNumbersElement = Array.from({ length: Math.ceil(newsList.length / pageDataNumber) }, (_, i) => i + 1).map((pageNumber) => {
-        // console.log("test")
         return (
             <span
                 key={pageNumber}

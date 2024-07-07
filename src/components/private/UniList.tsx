@@ -75,11 +75,7 @@ const UniList = (children: childrenMap) => {
             <h1 className="special-header">{children.listHeader}</h1>
             <div className="list">
                 {uniListElement}
-                {uniListElement}
-                {uniListElement}
-                {uniListElement}
-                {uniListElement}
-                {uniListElement}
+
             </div>
         </div>
     );

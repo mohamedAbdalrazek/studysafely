@@ -32,8 +32,6 @@ const Footer = () => {
             setFooterData(data);
         });
     }, []);
-    console.log(links);
-    console.log(footerData);
     return (
         <div className="footer">
             <div className="left">

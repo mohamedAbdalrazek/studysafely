@@ -29,7 +29,6 @@ const Accepted: React.FC = () => {
     }
     const [accptedHome, setAcceptedHome] = useState<acceptedHomeMap>();
     const widthCheck = (window.innerWidth) <  768;
-    console.log(widthCheck)
     useEffect(() => {
         // getting the accepted data related to the home page
         const fetchDataHome = async () => {

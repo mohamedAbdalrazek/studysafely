@@ -1,5 +1,5 @@
 import VideosSlider from "./VideosSlider";
-import { collection, doc, onSnapshot } from "firebase/firestore";
+import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../api/firestore";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -14,33 +14,51 @@ interface childrenMap {
     [key: string]: string | undefined;
 }
 const VideosList = (children: childrenMap) => {
-    const [videos, setVideos] = useState<VideosMap[]>();
-    const root:string = children.root == "public" ? "public": children.root == "private" ? "private": "other"
+    const [videos, setVideos] = useState<VideosMap[]>([]);
+    const root: string =
+        children.root == "public"
+            ? "public"
+            : children.root == "private"
+            ? "private"
+            : "other";
     useEffect(() => {
         const fetchDataHome = async () => {
             const videosRef = collection(
-                doc(collection(db, "videos"), root),
-                "videosList"
+                doc(collection(db, "videos"), "allVideos"),
+                "allVideos"
             );
-            onSnapshot(videosRef, (res: paramtersMap): void => {
+            let q;
+
+            if (root === "public" || root === "private") {
+                q = query(videosRef, where("domain", "==", root));
+            } else {
+                q = query(
+                    videosRef,
+                    where("domain", "not-in", ["public", "private"])
+                );
+            }
+            onSnapshot(q, (res: paramtersMap): void => {
                 const videosData: VideosMap[] = res.docs.map((doc: any) => ({
                     ...doc.data(),
                     id: doc.id,
                 }));
+
                 setVideos(videosData);
             });
         };
         fetchDataHome();
-    }, []);
+    }, [root]);
     return (
         <div className="videos-list">
-
-            {children.header&&<h1 className="special-header">{children.header}</h1>}
+            {children.header&&videos.length !==0 && (
+                <h1 className="special-header">{children.header}</h1>
+            )}
             <VideosSlider videosList={videos} />
-            {children.more&&<Link to={"/videos"} className="more">
-                {children.more}
-            </Link>}
-
+            {children.more && (
+                <Link to={"/videos"} className="more">
+                    {children.more}
+                </Link>
+            )}
         </div>
     );
 };

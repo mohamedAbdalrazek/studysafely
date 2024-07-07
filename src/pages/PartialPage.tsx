@@ -44,41 +44,49 @@ interface UniMap {
     whatsLink: string;
 }
 const PartialPage = ()=>{
-    const location =useLocation().pathname.split("/")[2].split('+')
-    const partialName = decodeURIComponent(location[0].split("-").join(" "))
-    const uniName = decodeURIComponent(location[1].split("-").join(" "))
-    const uniUrl = uniName.split(" ").join('-')
-    console.log(partialName, uniName)
+    const location =useLocation().pathname.split("/")[2].split("-").join(" ")
+    const partialName = decodeURIComponent(location)
     const [scholar, setScholar] = useState<ScholarListMap>()
     const [uni, setUni] = useState<UniMap>()
-    useEffect(()=>{
+    useEffect(() => {
         const scholarRef = collection(
             doc(collection(db, "partial"), "partialScholars"),
             "partialScholars"
         );
-        // console.log("منحة جامعة قادر حسن باشا لتخصص الهندسة الشاملة 4 سنين" == location)
+
         const q = query(scholarRef, where("mainInfo", "==", partialName));
-        onSnapshot(q, (res: paramtersMap): void => {
-            const uniArr: ScholarListMap[] = res.docs.map((doc: any) => ({
+        const unsubscribe = onSnapshot(q, (res) => {
+            const uniArr = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
-            setScholar(uniArr[0]);
+            setScholar(uniArr[0]); // Set the scholar state
         });
+
+        // Cleanup subscription on unmount
+        return () => unsubscribe();
+    }, [partialName]);
+
+    useEffect(() => {
+        if (!scholar?.uniName) return; // Wait until scholar and uniName are defined
+
         const uniListRef = collection(
             doc(collection(db, "private"), "privateUni"),
             "privateUni"
         );
-        const privateQ = query(uniListRef, where("name", "==", uniName));
-        onSnapshot(privateQ, (res: paramtersMap): void => {
-            const uniArr: UniMap[] = res.docs.map((doc: any) => ({
+
+        const privateQ = query(uniListRef, where("name", "==", scholar.uniName));
+        const unsubscribe = onSnapshot(privateQ, (res) => {
+            const uniArr = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
             setUni(uniArr[0]);
         });
-    },[])
-    console.log(scholar, uni)
+
+        // Cleanup subscription on unmount
+        return () => unsubscribe();
+    }, [scholar?.uniName]);
     return(
         <div className="partial-page">
             <div className="container sub-page">
@@ -108,7 +116,7 @@ const PartialPage = ()=>{
                                 <h3>
                                     {scholar?.mainInfo}
                                 </h3>
-                                <Link to={`/private/${uniUrl}`} className="special-link">
+                                <Link to={`/private/${uni?.name}`} className="special-link">
                                     تعرف علي الجامعة
                                 </Link>
                         </div>

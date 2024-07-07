@@ -19,94 +19,28 @@ interface chidrenMap {
     videosList: { [key: string]: string }[] | undefined;
 }
 const VideosSlider = (children: chidrenMap) => {
-    const viewWidth = window.innerWidth
-    const checkTwo = viewWidth < 992
-    const checkOne = viewWidth < 768
-    const videosPerSlide = !checkTwo ? 3 : checkOne ? 1 : 2  
+    const viewWidth = window.innerWidth;
+    const checkTwo = viewWidth < 992;
+    const checkOne = viewWidth < 768;
+    const videosPerSlide = !checkTwo ? 3 : checkOne ? 1 : 2;
     const videosListElement = children.videosList?.map((video) => {
         const url: string = video.videoName.replace(/ /g, "-");
         return (
-            <>
-                <SwiperSlide key={video.videoName} className="video-box">
-                    <Link to={`/videos/${url}`}>
-                        <div className="video-container">
-                            <ReactPlayer
-                                url={video.videoUrl}
-                                width={"100%"}
-                                height={"500"}
-                            />
-                            <img src={icon} alt="" className="icon" />
-                        </div>
-                        <h3>{video.videoName}</h3>
-                        <span className="date">{video.date}</span>
-                    </Link>
-                </SwiperSlide>
-                <SwiperSlide key={video.videoName} className="video-box">
-                    <Link to={`/videos/${video.videoName}`}>
-                        <div className="video-container">
-                            <ReactPlayer
-                                url={video.videoUrl}
-                                width={"100%"}
-                                height={"500"}
-                            />
-                            <img src={icon} alt="" className="icon" />
-                        </div>
-                        <h3>{video.videoName}</h3>
-                    </Link>
-                </SwiperSlide>
-                <SwiperSlide key={video.videoName} className="video-box">
-                    <Link to={`/videos/${video.videoName}`}>
-                        <div className="video-container">
-                            <ReactPlayer
-                                url={video.videoUrl}
-                                width={"100%"}
-                                height={"500"}
-                            />
-                            <img src={icon} alt="" className="icon" />
-                        </div>
-                        <h3>{video.videoName}</h3>
-                    </Link>
-                </SwiperSlide>
-                <SwiperSlide key={video.videoName} className="video-box">
-                    <Link to={`/videos/${video.videoName}`}>
-                        <div className="video-container">
-                            <ReactPlayer
-                                url={video.videoUrl}
-                                width={"100%"}
-                                height={"500"}
-                            />
-                            <img src={icon} alt="" className="icon" />
-                        </div>
-                        <h3>{video.videoName}</h3>
-                    </Link>
-                </SwiperSlide>
-                <SwiperSlide key={video.videoName} className="video-box">
-                    <Link to={`/videos/${video.videoName}`}>
-                        <div className="video-container">
-                            <ReactPlayer
-                                url={video.videoUrl}
-                                width={"100%"}
-                                height={"500"}
-                            />
-                            <img src={icon} alt="" className="icon" />
-                        </div>
-                        <h3>{video.videoName}</h3>
-                    </Link>
-                </SwiperSlide>
-                <SwiperSlide key={video.videoName} className="video-box">
-                    <Link to={`/videos/${video.videoName}`}>
-                        <div className="video-container">
-                            <ReactPlayer
-                                url={video.videoUrl}
-                                width={"100%"}
-                                height={"500"}
-                            />
-                            <img src={icon} alt="" className="icon" />
-                        </div>
-                        <h3>{video.videoName}</h3>
-                    </Link>
-                </SwiperSlide>
-            </>
+            <SwiperSlide key={video.videoName} className="video-box">
+                <Link to={`/videos/${url}`}>
+                    <div className="video-container">
+                        <ReactPlayer
+                            url={video.videoUrl}
+                            width={"100%"}
+                            height={"500"}
+                            clasName="video"
+                        />
+                        <img src={icon} alt="" className="icon" />
+                    </div>
+                    <h3>{video.videoName}</h3>
+                    <span className="date">{video.date}</span>
+                </Link>
+            </SwiperSlide>
         );
     });
     return (
@@ -116,7 +50,7 @@ const VideosSlider = (children: chidrenMap) => {
             slidesPerView={videosPerSlide}
             className="videos-slider"
         >
-            {videosListElement}
+            <>{videosListElement}</>
             <SwiperNavButtons />
         </Swiper>
     );

@@ -38,7 +38,6 @@ const List = (children:childrenMap)=>{
     const scholarListElement = scholarList.map((scholar)=>{
         const hashtagesArray = scholar.hashtages.split(".");
         const url:string = scholar.mainInfo.replace(/ /g, "-")
-        const urlName:string = scholar.uniName.replace(/ /g, "-")
         return(
             <div className="scholar">
                 <div className="content">
@@ -47,7 +46,7 @@ const List = (children:childrenMap)=>{
                     </h3>
                     <div className="sub-info">
                         <div className="left">
-                            <Link to={`/partial/${url}+${urlName}`} className="global-btn">اقرأ المزيد</Link>
+                            <Link to={`/partial/${url}`} className="global-btn">اقرأ المزيد</Link>
                             <a  href={scholar.buttonLink} className="global-btn">{scholar.buttonText}</a>
                         </div>
                         <div className="right">

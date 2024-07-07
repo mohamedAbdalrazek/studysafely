@@ -1,5 +1,5 @@
 .public{
-    padding-top: calc(var(--nav-height) + var(--section-padding));
+    padding-top: calc(var(--nav-height));
     background-color: white;
 }
 .public .slider{

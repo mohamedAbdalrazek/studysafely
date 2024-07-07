@@ -1,12 +1,13 @@
 import { collection, doc, getDoc } from "firebase/firestore";
 import { db } from "../../api/firestore";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./nav.css";
 import besideLogo from "../../assets/images/beside.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 const Nav = () => {
+    const location = useLocation()
     interface LinkMap {
         [key: string]: string;
     }
@@ -22,6 +23,10 @@ const Nav = () => {
             setLinks(data);
         });
     }, []);
+    useEffect(()=>{
+        setIsOpen(false)
+        window.scrollTo(0, 0)
+    },[location])
     return (
         <div className="nav">
             <Link className="logo" to="/">
