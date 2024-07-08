@@ -6,10 +6,7 @@ import "./other-home.css"
 const OtherHome:React.FC = ()=>{
     //type script interfaces
     interface otherHomeDataMap {
-        header:string
-    }
-    interface paramtersMap {
-        [key: string]: any;
+        header?:string
     }
     interface otherListMap {
         [key: string]: string;
@@ -20,8 +17,8 @@ const OtherHome:React.FC = ()=>{
         // getting the new data related to the home page
         const fetchDataHome = async () => {
             const docRef = doc(collection(db, "home"), "other");
-            await getDoc(docRef).then((res: paramtersMap): void => {
-                const date: otherHomeDataMap = res.data();
+            await getDoc(docRef).then((res): void => {
+                const date = res.data();
                 setOtherHomeData(date);
             });
         };
@@ -29,8 +26,8 @@ const OtherHome:React.FC = ()=>{
 
         //getting the other services list
         const listRef = collection(db,"other");
-        onSnapshot(listRef, (res: paramtersMap): void => {
-            const otherArr: otherListMap[] = res.docs.map((doc:any) => ({
+        onSnapshot(listRef, (res): void => {
+            const otherArr: otherListMap[] = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
@@ -48,8 +45,7 @@ const OtherHome:React.FC = ()=>{
             else{
                 url += other.name[i]
             }
-        };
-        //returning the html elemnt 
+        }
         return(
             <Link to={url} key={other.name}>
                 <span>

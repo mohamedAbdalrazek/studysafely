@@ -16,16 +16,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareWhatsapp } from "@fortawesome/free-brands-svg-icons";
 const Apply: React.FC = () => {
     interface ApplyMap {
-        [key: string]: string;
+        [key: string]: string|undefined;
     }
-    interface paramtersMap {
-        [key: string]: any;
-    }
-    const [applyData, setApplyData] = useState<ApplyMap>({});
+    const [applyData, setApplyData] = useState<ApplyMap|undefined>({});
     const [video, setVideo] = useState<ApplyMap>({});
     useEffect(() => {
         const docRef = doc(collection(db, "apply"), "apply");
-        getDoc(docRef).then((res: paramtersMap): void => {
+        getDoc(docRef).then((res): void => {
             const date = res.data();
             setApplyData(date);
         });
@@ -34,8 +31,8 @@ const Apply: React.FC = () => {
             "allVideos"
         );
         const q = query(videoRef, where("domain", "==", "apply"));
-        onSnapshot(q, (res: paramtersMap): void => {
-            const videos: ApplyMap[] = res.docs.map((doc: any) => ({
+        onSnapshot(q, (res): void => {
+            const videos: ApplyMap[] = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
@@ -62,8 +59,8 @@ const Apply: React.FC = () => {
                         />
                     </div>}
                     <div className="right" style={video==undefined ? conditionalStyle : {}}>
-                        <h1>{applyData.title}</h1>
-                        <p>{applyData.subTitle}</p>
+                        <h1>{applyData?.title}</h1>
+                        <p>{applyData?.subTitle}</p>
                     </div>
                 </div>
                 <div className="links">

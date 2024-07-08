@@ -4,21 +4,17 @@ import { addDoc, collection, doc, onSnapshot } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { db, mediaUrl } from "../../api/firestore";
 import { v4 as uuidv4 } from "uuid";
-import UploadImage from "../global/UploadImage";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import UploadVideo from "./UploadVideo";
 
-interface paramtersMap {
-    [key: string]: any;
-}
 interface VideoMap {
     [key: string]: string;
 }
 
 const AddNewVideo = () => {
     const navigate = useNavigate();
-    const [video, setVideo] = useState<File>();
-    const [names, setNames] = useState<[string]>();
+    const [video, setVideo] = useState<File|undefined>();
+    const [names, setNames] = useState<string[]>();
     const [sending, setSending] = useState<boolean>(false);
     const {
         register,
@@ -41,12 +37,12 @@ const AddNewVideo = () => {
     ];
     useEffect(() => {
         const otherServicesRef = collection(db, "other");
-        onSnapshot(otherServicesRef, (res: paramtersMap): void => {
-            const videosData = res.docs.map((doc: any) => ({
+        onSnapshot(otherServicesRef, (res): void => {
+            const videosData:VideoMap[] = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
-            const tempNames: [string] = [];
+            const tempNames: string[] = [];
             videosData.forEach((item) => {
                 tempNames.push(item.name);
             });
@@ -162,7 +158,7 @@ const AddNewVideo = () => {
             {/* ---------------------------------------------------------------------------------- */}
 
             <label className="admin-label">Upload the Video</label>
-            <UploadVideo setVideo={setVideo} name="news-video" />
+            <UploadVideo setVideo={setVideo} name="news-video" /> 
             {/* ---------------------------------------------------------------------------------- */}
             <input
                 type="submit"

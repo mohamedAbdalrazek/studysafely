@@ -15,38 +15,43 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import UploadMultibleImages from "../global/UploadMultibleImages";
 
-interface paramtersMap {
-    [key: string]: any;
+interface ImageData {
+    imageUrl: string;
+    imageName: string;
 }
-type pageDataMap = {
-    imagesList: { [key: string]: string }[];
-} & {
-    [key: string]: string;
-};
+interface pageDataMap {
+    backgroundUrl?: string;
+    backgroundName?: string;
+    imagesList?: ImageData[];
+    name?: string;
+    body?: string;
+    whatsLink?: string;
+    id:string
+}
 const EditOtherServices = () => {
     const navigate = useNavigate();
-    const [images, setImages] = useState<File[]>();
+    const [images, setImages] = useState<File[]|null>();
     const encodedMainInfo = useLocation()
         .pathname.split("/")[3]
         .split("-")
         .join(" ");
     const serviceName = decodeURIComponent(encodedMainInfo);
-    const [background, setBackground] = useState<File>();
+    const [background, setBackground] = useState<File|null>();
     const [sending, setSending] = useState<boolean>(false);
     const [serviceData, setServiceData] = useState<pageDataMap>();
     const [initialImages, setInitialImages] =
-        useState<{ [key: string]: string }[]>();
+        useState<ImageData[]|undefined>();
     const {
         register,
         handleSubmit,
         formState: { errors },
         reset,
-    } = useForm();
+    } = useForm<pageDataMap>();
     useEffect(() => {
         const newsRef = collection(db, "other");
         const q = query(newsRef, where("name", "==", serviceName));
-        onSnapshot(q, (res: paramtersMap): void => {
-            const serviceData: pageDataMap[] = res.docs?.map((doc: any) => ({
+        onSnapshot(q, (res): void => {
+            const serviceData: pageDataMap[] = res.docs?.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
@@ -185,7 +190,7 @@ const EditOtherServices = () => {
             <UploadImage
                 setImage={setBackground}
                 name="other-background"
-                isRequied={true}
+                isRequired={true}
             />
             {/* ---------------------------------------------------------------------------------- */}
 

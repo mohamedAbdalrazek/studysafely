@@ -4,46 +4,53 @@ import { useForm } from "react-hook-form";
 import { db } from "../../api/firestore";
 import { Link, useNavigate } from "react-router-dom";
 import EditListItem from "../global/EditListItem";
+
 interface FormMap {
     [key: string]: string;
 }
+
+interface Image {
+    imageName: string;
+    imageUrl: string;
+}
+
 interface DataMap {
-    acceptedList: {
-        imageName: string;
-        imageUrl: string;
-    }[];
+    acceptedList?: Image[]; // Make acceptedList optional
     header: string;
 }
+
 const EditAccepted = () => {
-    const [data, setData] = useState<DataMap>();
+    const [data, setData] = useState<DataMap>({ header: "", acceptedList: [] }); // Initialize with an empty array
+
     const navigate = useNavigate();
+
     const {
         register,
         handleSubmit,
         formState: { errors },
         reset,
     } = useForm<FormMap>();
+
     useEffect(() => {
         const docRef = doc(collection(db, "home"), "accepted");
-        const getData = async () => {
-            const docSnap = await getDoc(docRef);
 
-            if (docSnap.exists()) {
-                const tempData = docSnap.data();
-                reset(docSnap.data());
-                return tempData as DataMap;
-            } else {
-                console.error("No such document!");
-                return undefined;
+        const getData = async () => {
+            try {
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const tempData = docSnap.data();
+                    reset(docSnap.data());
+                    setData(tempData as DataMap);
+                } else {
+                    console.error("No such document!");
+                }
+            } catch (error) {
+                console.log(error);
             }
         };
-        getData()
-            .then((res) => {
-                setData(res);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+
+        getData();
     }, [reset]);
 
     const onSubmit = (tempData: FormMap) => {
@@ -51,33 +58,38 @@ const EditAccepted = () => {
             ...data,
             header: tempData.header,
         };
+
         const docRef = doc(collection(db, "home"), "accepted");
         setDoc(docRef, formedData).then(() => {
             navigate("/");
         });
     };
+
     const handleDelete = async (name: string) => {
-        const filteredList = data?.acceptedList.filter(
+        const filteredList = data?.acceptedList?.filter(
             (image) => image.imageName !== name
         );
+
         const formedData: DataMap = {
             ...data,
             acceptedList: filteredList,
         };
-        setData(formedData)
+
+        setData(formedData); 
+
         const docRef = doc(collection(db, "home"), "accepted");
         await setDoc(docRef, formedData);
     };
-    const listElement = data?.acceptedList.map((item) => {
-        return (
-            <EditListItem
-                name={item.imageName}
-                isEdit={false}
-                domain={null}
-                handleDelete={handleDelete}
-            />
-        );
-    });
+
+    const listElement = data?.acceptedList?.map((item) => (
+        <EditListItem
+            key={item.imageName} 
+            name={item.imageName}
+            isEdit={false}
+            domain=""
+            handleDelete={handleDelete}
+        />
+    ));
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -109,7 +121,16 @@ const EditAccepted = () => {
                 Image of the accepted students
             </h3>
             {listElement}
-            <Link to={"add"} className="admin-button" style={{display:"block", margin:"auto", width:'fit-content', textDecoration:"none"}}>
+            <Link
+                to={"add"}
+                className="admin-button"
+                style={{
+                    display: "block",
+                    margin: "auto",
+                    width: "fit-content",
+                    textDecoration: "none",
+                }}
+            >
                 Add Image
             </Link>
             <button type="submit" className="admin-button">
@@ -118,4 +139,5 @@ const EditAccepted = () => {
         </form>
     );
 };
+
 export default EditAccepted;

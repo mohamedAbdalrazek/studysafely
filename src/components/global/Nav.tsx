@@ -9,16 +9,13 @@ import { faBars, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 const Nav = () => {
     const location = useLocation()
     interface LinkMap {
-        [key: string]: string;
+        [key: string]: string|undefined;
     }
-    interface paramtersMap {
-        [key: string]: any;
-    }
-    const [links, setLinks] = useState<LinkMap>({});
+    const [links, setLinks] = useState<LinkMap|undefined>();
     const [isOpen, setIsOpen] = useState(false)
     useEffect(() => {
         const docRef = doc(collection(db, "global"), "nav");
-        getDoc(docRef).then((res: paramtersMap): void => {
+        getDoc(docRef).then((res): void => {
             const data = res.data();
             setLinks(data);
         });
@@ -35,18 +32,18 @@ const Nav = () => {
             <div className={`left ${isOpen?"open":""}`}>
                 <FontAwesomeIcon icon={faCircleXmark} className="close" onClick={()=>setIsOpen(false)} />
                 <div className="links">
-                    <Link to="/">{links.home}</Link>
-                    <Link to="private">{links.private}</Link>
-                    <Link to="public">{links.public}</Link>
-                    <Link to="news">{links.news}</Link>
-                    <Link to="partial">{links.partial}</Link>
-                    <Link to="videos">{links.videos}</Link>
-                    <Link to="agent">{links.agent}</Link>
+                    <Link to="/">{links?.home}</Link>
+                    <Link to="private">{links?.private}</Link>
+                    <Link to="public">{links?.public}</Link>
+                    <Link to="news">{links?.news}</Link>
+                    <Link to="partial">{links?.partial}</Link>
+                    <Link to="videos">{links?.videos}</Link>
+                    <Link to="agent">{links?.agent}</Link>
                 </div>
 
                 <div>
                     <Link to="apply" className="global-btn">
-                        {links.button}
+                        {links?.button}
                     </Link>
                 </div>
             </div>

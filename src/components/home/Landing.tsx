@@ -7,16 +7,13 @@ import "./landing.css"
 
 const Landing:React.FC  = ()=>{
     interface LinkMap {
-        [key: string]: string;
+        [key: string]: string|undefined;
     }
-    interface paramtersMap{
-        [key: string]: any;
 
-    }
-    const [landingData, setLandingData] = useState<LinkMap>({});
+    const [landingData, setLandingData] = useState<LinkMap|undefined>({});
     useEffect(() => {
         const docRef = doc(collection(db, "home"), "landing");
-        getDoc(docRef).then((res: paramtersMap): void => {
+        getDoc(docRef).then((res): void => {
             const date = res.data();
             setLandingData(date);
         });
@@ -24,16 +21,16 @@ const Landing:React.FC  = ()=>{
     return(
         <div className="landing">
             <div className="background">
-                <img src={landingData.backgroundUrl} alt={landingData.backgroundName} />
+                <img src={landingData?.backgroundUrl} alt={landingData?.backgroundName} />
             </div>
             <div className="content">
                 <h1>
-                    {landingData.header}
+                    {landingData?.header}
                 </h1>
                 <p>
-                    {landingData.subHeader}
+                    {landingData?.subHeader}
                 </p>
-                <Link to="apply" className="global-btn">{landingData.button}</Link>
+                <Link to="apply" className="global-btn">{landingData?.button}</Link>
             </div>
         </div>
     )

@@ -1,26 +1,31 @@
-import { useRef } from "react";
-import "./upload-image.css"
-interface ParamMap {
-    setVideo: React.Dispatch<React.SetStateAction<string>>;
-    name:string;
+import React, { useRef } from "react";
+import "./upload-image.css";
+
+interface UploadVideoProps {
+    setVideo: React.Dispatch<React.SetStateAction<File | undefined>>;
+    name: string;
 }
-export default function UploadVideo({
-    setVideo,
-    name,
-}:ParamMap) {
+
+const UploadVideo: React.FC<UploadVideoProps> = ({ setVideo, name }) => {
     const inputRef = useRef<HTMLInputElement>(null);
-    function handleChange(e:React.ChangeEvent<HTMLInputElement>) {
-        setVideo(e.target.files[0]);
-    }
-    function handleDelete() {
-        setVideo(null);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            setVideo(file);
+        }
+    };
+
+    const handleDelete = () => {
+        setVideo(undefined); // Reset to undefined when deleting
         if (inputRef.current) {
             inputRef.current.value = '';
         }
-    }   
+    };
+
     return (
         <label
-            htmlFor={name ? name : "image"}
+            htmlFor={name ? name : "video"}
             className="drop-container"
             id="dropcontainer"
         >
@@ -29,7 +34,7 @@ export default function UploadVideo({
                 ref={inputRef}
                 required={true}
                 type="file"
-                id={name ? name : "image"}
+                id={name ? name : "video"}
                 accept="video/*"
                 className="upload"
                 onChange={(e) => handleChange(e)}
@@ -39,4 +44,6 @@ export default function UploadVideo({
             </button>
         </label>
     );
-}
+};
+
+export default UploadVideo;

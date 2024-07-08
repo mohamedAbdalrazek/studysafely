@@ -7,28 +7,26 @@ interface childrenMap {
     listHeader: string | undefined;
     listNumber: number | undefined;
 }
-interface paramtersMap {
-    [key: string]: any;
-}
 interface UniListMap {
-    body: string;
-    fee: number;
-    fieldsHeader: string;
-    backgroundUrl: string;
-    backgroundName: string;
-    fieldsList: {
+    body?: string;
+    fee?: number;
+    fieldsHeader?: string;
+    backgroundUrl?: string;
+    backgroundName?: string;
+    fieldsList?: {
         buttonLink: string;
         duration: number;
         fee: number;
         language: string;
         name: string;
     }[];
-    location: string;
-    logoName: string;
-    logoUrl: string;
-    name: string;
-    studentsNumber: number;
-    whatsLink: string;
+    location?: string;
+    logoName?: string;
+    logoUrl?: string;
+    name?: string;
+    studentsNumber?: number;
+    whatsLink?: string;
+    id:string
 }
 const UniList = (children: childrenMap) => {
     const [uniList, setUniList] = useState<UniListMap[]>([]);
@@ -37,8 +35,8 @@ const UniList = (children: childrenMap) => {
             doc(collection(db, "private"), "privateUni"),
             "privateUni"
         );
-        onSnapshot(newsUniRef, (res: paramtersMap): void => {
-            const UniData: UniListMap[] = res.docs.map((doc: any) => ({
+        onSnapshot(newsUniRef, (res): void => {
+            const UniData = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
@@ -46,7 +44,7 @@ const UniList = (children: childrenMap) => {
         });
     }, []);
     const uniListElement = uniList?.map((uni) => {
-        const url:string = uni.name.replace(/ /g, "-")
+        const url:string = uni.name?uni.name.replace(/ /g, "-"):""
         return (
             <Link to={url} className="uni">
                 <div className="background">

@@ -5,9 +5,7 @@ import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
 import icon from "../../../assets/icons/play-button2.png";
 
-interface paramtersMap {
-    [key: string]: any;
-}
+
 
 interface VideosMap {
     [key: string]: string;
@@ -19,8 +17,8 @@ const SideVideos = () => {
             doc(collection(db, "videos"), "allVideos"),
             "allVideos"
         );
-        onSnapshot(videosRef, (res: paramtersMap): void => {
-            const data: VideosMap[] = res.docs.map((doc: any) => ({
+        onSnapshot(videosRef, (res): void => {
+            const data: VideosMap[] = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));

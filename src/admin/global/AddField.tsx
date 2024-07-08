@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 
-interface FieldFormProps {
-    onSave: (field: Field) => void;
-    onClose: () => void;
-}
+
 
 interface Field {
     buttonLink: string;
     duration: number;
     fee: number;
-    language: "en" | "ar";
+    language: "en" | "tr";
     name: string;
 }
-
+interface FieldFormProps {
+    onSave: (field: Field) => void;
+    onClose: () => void;
+}
 const AddField: React.FC<FieldFormProps> = ({ onSave, onClose }) => {
     const [fieldData, setFieldData] = useState<Field>({
         buttonLink: "",
@@ -34,8 +34,7 @@ const AddField: React.FC<FieldFormProps> = ({ onSave, onClose }) => {
         });
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const handleSubmit = () => {
         // Basic validation
         if (
             !fieldData.buttonLink ||
@@ -47,7 +46,6 @@ const AddField: React.FC<FieldFormProps> = ({ onSave, onClose }) => {
             setErrors(["All fields are required"]);
             return;
         }
-
         onSave(fieldData);
         onClose();
     };

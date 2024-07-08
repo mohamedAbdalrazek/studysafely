@@ -26,9 +26,6 @@ interface UniMap {
     studentsNumber: number;
     whatsLink: string;
 }
-interface paramtersMap {
-    [key: string]: any;
-}
 interface FlagsMap{
     [key: string]: string;
 
@@ -39,7 +36,7 @@ const PrivateMain = () => {
     const [flags, setFlags] = useState<FlagsMap>()
     useEffect(()=>{
         const flagsRef = doc(collection(db, "global"), "flags")
-        getDoc(flagsRef).then((res: paramtersMap): void => {
+        getDoc(flagsRef).then((res): void => {
             const date = res.data();
             setFlags(date);
         });

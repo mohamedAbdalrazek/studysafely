@@ -6,42 +6,42 @@ import { useEffect, useState } from "react"
 import { collection, doc, onSnapshot, query, where } from "firebase/firestore"
 import { db } from "../api/firestore"
 import SideBar from "../components/global/SideBar"
-interface paramtersMap {
-    [key: string]: any;
-}
+
 interface ScholarListMap {
-    body:string;
-    buttonLink:string;
-    buttonText:string;
-    hashtages:string;
-    header:string;
-    mainInfo:string;
-    priceAfter:number;
-    priceBefore:number;
-    uniName:string;
-    logoUrl:string;
-    logoName:string;
+    body?:string;
+    buttonLink?:string;
+    buttonText?:string;
+    hashtages?:string;
+    header?:string;
+    mainInfo?:string;
+    priceAfter?:number;
+    priceBefore?:number;
+    uniName?:string;
+    logoUrl?:string;
+    logoName?:string;
+    id:string
 }
 interface UniMap {
-    body: string;
-    fee: number;
-    fieldsHeader: string;
-    backgroundUrl: string;
-    backgroundName: string;
-    fieldsList: {
+    body?: string;
+    fee?: number;
+    fieldsHeader?: string;
+    backgroundUrl?: string;
+    backgroundName?: string;
+    fieldsList?: {
         buttonLink: string;
         duration: number;
         fee: number;
         language: string;
         name: string;
     }[];
-    imagesList:[{[key:string]:string}]
-    location: string;
-    logoName: string;
-    logoUrl: string;
-    name: string;
-    studentsNumber: number;
-    whatsLink: string;
+    imagesList?:[{[key:string]:string}]
+    location?: string;
+    logoName?: string;
+    logoUrl?: string;
+    name?: string;
+    studentsNumber?: number;
+    whatsLink?: string;
+    id:string
 }
 const PartialPage = ()=>{
     const location =useLocation().pathname.split("/")[2].split("-").join(" ")
@@ -68,7 +68,7 @@ const PartialPage = ()=>{
     }, [partialName]);
 
     useEffect(() => {
-        if (!scholar?.uniName) return; // Wait until scholar and uniName are defined
+        if (!scholar?.uniName) return; 
 
         const uniListRef = collection(
             doc(collection(db, "private"), "privateUni"),

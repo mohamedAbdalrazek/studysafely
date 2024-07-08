@@ -5,9 +5,7 @@ import { Link } from "react-router-dom";
 import "./private-home.css"
 
 const PrivateHome:React.FC = ()=>{
-    interface paramtersMap {
-        [key: string]: any;
-    }
+
     interface privateHomeMap {
         [key: string]: string;
     }
@@ -16,8 +14,8 @@ const PrivateHome:React.FC = ()=>{
         // getting the new data related to the home page
         const fetchDataHome = async () => {
             const docRef = doc(collection(db, "home"), "private");
-            await getDoc(docRef).then((res: paramtersMap): void => {
-                const date: privateHomeMap = res.data();
+            await getDoc(docRef).then((res): void => {
+                const date = res.data();
                 setPrivateHome(date);
             });
         };

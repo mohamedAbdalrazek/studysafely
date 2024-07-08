@@ -4,21 +4,19 @@ import { db } from "../../api/firestore";
 import EditListItem from "../global/EditListItem";
 import { Link } from "react-router-dom";
 
-interface paramtersMap {
-    [key: string]: any;
-}
 interface PartialListMap {
-    body:string;
-    buttonLink:string;
-    buttonText:string;
-    hashtages:string;
-    header:string;
-    mainInfo:string;
-    priceAfter:number;
-    priceBefore:number;
-    uniName:string;
-    logoUrl:string;
-    logoName:string;
+    body?:string;
+    buttonLink?:string;
+    buttonText?:string;
+    hashtages?:string;
+    header?:string;
+    mainInfo?:string;
+    priceAfter?:number;
+    priceBefore?:number;
+    uniName?:string;
+    logoUrl?:string;
+    logoName?:string;
+    id:string
 }
 const EditPartialList = ()=>{
     const [partialList, setPartialList] = useState<PartialListMap[]>([]);
@@ -27,8 +25,8 @@ const EditPartialList = ()=>{
             doc(collection(db, "partial"), "partialScholars"),
             "partialScholars"
         );
-        onSnapshot(newsUniRef, (res: paramtersMap): void => {
-            const UniData: PartialListMap[] = res.docs.map((doc: any) => ({
+        onSnapshot(newsUniRef, (res): void => {
+            const UniData: PartialListMap[] = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
@@ -41,10 +39,10 @@ const EditPartialList = ()=>{
         await deleteDoc(docRef)
     };
     const listElement = partialList.map((item)=>{
-        const url:string = item.mainInfo.replace(/ /g, "-")
+        const url:string = item.mainInfo?item.mainInfo.replace(/ /g, "-"):""
 
         return(
-            <EditListItem name={item.mainInfo} isEdit={true} domain={url} handleDelete={handleDelete} />
+            <EditListItem name={item.mainInfo||""} isEdit={true} domain={url} handleDelete={handleDelete} />
         )
     })
     return(

@@ -4,51 +4,54 @@ import { db } from "../../api/firestore";
 import EditListItem from "./EditListItem";
 import { Link } from "react-router-dom";
 
-interface paramtersMap {
-    [key: string]: any;
-}
-interface VideoListMap {
+interface Video {
     [key: string]: string;
 }
-const EditVideos = ()=>{
-    const [videoList, setVideoList] = useState<VideoListMap[]>()
-    
-    const handleDelete = async (name:string) => {
-        const itemToBeDeleted = videoList?.filter((video)=>video.videoName == name)[0]
-        const docRef = doc(doc(collection(db, "videos"), "allVideos"),"allVideos", itemToBeDeleted?.id);
-        await deleteDoc(docRef)
+
+const EditVideos = () => {
+    const [videoList, setVideoList] = useState<Video[]>([]);
+
+    const handleDelete = async (name: string) => {
+        try {
+            const itemToBeDeleted = videoList?.find((video) => video.videoName === name);
+            if (itemToBeDeleted) {
+                const docRef = doc(collection(db, "videos"), itemToBeDeleted.id);
+                await deleteDoc(docRef);
+            } else {
+                console.error(`Video with name "${name}" not found in videoList.`);
+            }
+        } catch (error) {
+            console.error("Error deleting video:", error);
+        }
     };
-    
+
     useEffect(() => {
-        const newsUniRef = collection(
-            doc(collection(db, "videos"), "allVideos"),
-            "allVideos"
-        );
-        onSnapshot(newsUniRef, (res: paramtersMap): void => {
-            const videosData: VideoListMap[] = res.docs.map((doc: any) => ({
-                ...doc.data(),
+        const videosRef = collection(db, "videos");
+        const unsubscribe = onSnapshot(videosRef, (snapshot) => {
+            const videosData: Video[] = snapshot.docs.map((doc) => ({
                 id: doc.id,
+                ...doc.data(),
             }));
             setVideoList(videosData);
         });
-    }, []);
-    const listElement = videoList?.map((item)=>{
-        const url:string = item.videoName.replace(/ /g, "-")
 
-        return(
-            <EditListItem name={item.videoName} isEdit={false} domain={url} handleDelete = {handleDelete} />
-        )
-    })
-    return(
+        // Clean up listener on unmount or cleanup
+        return () => unsubscribe();
+    }, []);
+
+    const listElement = videoList.map((item) => (
+        <EditListItem key={item.id} name={item.videoName} isEdit={false} domain={item.videoName} handleDelete={handleDelete} />
+    ));
+
+    return (
         <div className="admin-list">
-            <h1 className="admin-header">
-                الفيديوهات
-            </h1>
+            <h1 className="admin-header">الفيديوهات</h1>
             {listElement}
-            <Link to={"add"} className="admin-button">
+            <Link to="add" className="admin-button">
                 Add Video
             </Link>
         </div>
-    )
-}
-export default EditVideos
+    );
+};
+
+export default EditVideos;

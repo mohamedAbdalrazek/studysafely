@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import { useForm } from "react-hook-form";
-import { addDoc, collection, doc, onSnapshot } from "firebase/firestore";
+import { addDoc, collection, DocumentData, QuerySnapshot, QueryDocumentSnapshot, doc, onSnapshot, CollectionReference, Query } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { db, mediaUrl } from "../../api/firestore";
 import { v4 as uuidv4 } from "uuid";
 import UploadImage from "../global/UploadImage";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-interface paramtersMap {
-    [key: string]: any;
-}
 interface newsListMap {
     hashtages: string;
     parentDomain: string;
@@ -28,16 +25,19 @@ interface FormedDataMap {
     subTitle: string;
     title: string;
 }
+interface Map{
+    [id:string]:string
+}
 const AddNews = () => {
     const navigate = useNavigate();
     const [names, setNames] = useState<string[]>([]);
     const [sending, setSending] = useState(false);
-    const [image, setImage] = useState<File>();
+    const [image, setImage] = useState<File|null>();
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm();
+    } = useForm<newsListMap>();
     const months = [
         "يناير",
         "فبراير",
@@ -52,33 +52,36 @@ const AddNews = () => {
         "نوفمبر",
         "ديسمبر",
     ];
-    const handleDropdownChange = async (event) => {
+    const handleDropdownChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
         const subRefKey =
-            value == "private"
+            value === "private"
                 ? "privateUni"
-                : value == "public"
+                : value === "public"
                 ? "publicUni"
-                : value == "partial"
+                : value === "partial"
                 ? "partialScholars"
-                : value == "other"
+                : value === "other"
                 ? "other"
                 : "";
-        let ref;
+    
+        let ref: undefined | CollectionReference<DocumentData> | Query<DocumentData>;
+    
         if (subRefKey === "other") {
             ref = collection(db, subRefKey);
         } else if (subRefKey) {
             ref = collection(doc(collection(db, value), subRefKey), subRefKey);
         }
-        if (subRefKey) {
-            onSnapshot(ref, (res: paramtersMap): void => {
-                const arr: [] = res.docs.map((doc: any) => ({
+    
+        if (ref) {
+            onSnapshot(ref as Query<DocumentData>, (res: QuerySnapshot<DocumentData>): void => {
+                const arr:Map[]= res.docs.map((doc: QueryDocumentSnapshot<DocumentData>) => ({
                     ...doc.data(),
                     id: doc.id,
                 }));
                 const names: string[] = [];
                 arr.forEach((item) => {
-                    if (value != "partial") {
+                    if (value !== "partial") {
                         names.push(item?.name);
                     } else {
                         names.push(item?.mainInfo);
@@ -195,17 +198,17 @@ const AddNews = () => {
             {errors.title && <p className="admin-error">Title is required</p>}
             {/* ---------------------------------------------------------------------------------- */}
 
-            <label htmlFor="SubTitle" className="admin-label">
+            <label htmlFor="subTitle" className="admin-label">
                 Sub Title of the news
             </label>
             <input
-                id="SubTitle"
+                id="subTitle"
                 type="text"
-                {...register("SubTitle", { required: true })}
+                {...register("subTitle", { required: true })}
                 placeholder="Sub Title"
                 className="admin-input"
             />
-            {errors.SubTitle && (
+            {errors.subTitle && (
                 <p className="admin-error">Sub Title is required</p>
             )}
             {/* ---------------------------------------------------------------------------------- */}
@@ -229,7 +232,7 @@ const AddNews = () => {
             <UploadImage
                 setImage={setImage}
                 name="news-image"
-                isRequied={true}
+                isRequired={true}
             />
             {/* ---------------------------------------------------------------------------------- */}
             <input

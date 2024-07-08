@@ -7,9 +7,7 @@ import "./videos-list.css";
 interface VideosMap {
     [key: string]: string;
 }
-interface paramtersMap {
-    [key: string]: any;
-}
+
 interface childrenMap {
     [key: string]: string | undefined;
 }
@@ -37,8 +35,8 @@ const VideosList = (children: childrenMap) => {
                     where("domain", "not-in", ["public", "private"])
                 );
             }
-            onSnapshot(q, (res: paramtersMap): void => {
-                const videosData: VideosMap[] = res.docs.map((doc: any) => ({
+            onSnapshot(q, (res): void => {
+                const videosData: VideosMap[] = res.docs.map((doc) => ({
                     ...doc.data(),
                     id: doc.id,
                 }));

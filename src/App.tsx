@@ -56,7 +56,7 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route element={<AdminLayout />} path="/4ebdeab6-4058-4671-942a-258434abb061">
-                    <Route element={<EditLanding />} index/>
+                    <Route element={<EditLanding />} index />
                     <Route element={<EditNewsHome />} path="news-home"/>
                     <Route element={<EditPublicHome />} path="public-home"/>
                     <Route element={<EditPrivateHome />} path="private-home"/>

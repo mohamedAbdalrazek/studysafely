@@ -4,25 +4,25 @@ import { db } from "../../api/firestore";
 import EditListItem from "../global/EditListItem";
 import { Link } from "react-router-dom";
 
-interface paramtersMap {
-    [key: string]: any;
+
+interface ImageData {
+    imageUrl: string;
+    imageName: string;
 }
 interface UniListMap {
-    body: string;
-    fee: number;
-    fieldsHeader: string;
-    backgroundUrl: string;
-    backgroundName: string;
-    desc: string;
-    imagesList: {
-        [key: string]: string;
-    }[];
-    location: string;
-    logoName: string;
-    logoUrl: string;
-    name: string;
-    studentsNumber: number;
-    whatsLink: string;
+    body?: string;
+    fee?: number;
+    fieldsHeader?: string;
+    backgroundUrl?: string;
+    backgroundName?: string;
+    desc?: string;
+    imagesList?:ImageData[];
+    location?: string;
+    logoName?: string;
+    logoUrl?: string;
+    name?: string;
+    studentsNumber?: number;
+    whatsLink?: string;
     id:string
 }
 const EditPublicList = ()=>{
@@ -32,8 +32,8 @@ const EditPublicList = ()=>{
             doc(collection(db, "public"), "publicUni"),
             "publicUni"
         );
-        onSnapshot(newsUniRef, (res: paramtersMap): void => {
-            const UniData: UniListMap[] = res.docs.map((doc: any) => ({
+        onSnapshot(newsUniRef, (res): void => {
+            const UniData: UniListMap[] = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
@@ -46,10 +46,10 @@ const EditPublicList = ()=>{
         await deleteDoc(docRef)
     };
     const listElement = uniList.map((item)=>{
-        const url:string = item.name.replace(/ /g, "-")
+        const url:string = item.name?item.name.replace(/ /g, "-"):""
 
         return(
-            <EditListItem name={item.name} isEdit={true} domain={url} handleDelete={handleDelete} />
+            <EditListItem name={item.name||""} isEdit={true} domain={url} handleDelete={handleDelete} />
         )
     })
     return(

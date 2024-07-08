@@ -5,7 +5,7 @@ interface Field {
     buttonLink: string;
     duration: number;
     fee: number;
-    languege: "en" | "ar";
+    language: "en" | "tr";
     name: string;
 }
 interface ParamMap {
@@ -21,7 +21,7 @@ const AddFieldList = ({setFieldsList, fieldsList}:ParamMap) => {
         setFields(fieldsList)
     },[fieldsList])
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const handleAddField = (field: Field) => {
+    const handleAddField = (field: Field):void => {
         setFields((prevFields) => [...prevFields, field]);
     };
     const handleDeleteField = (index: number) => {

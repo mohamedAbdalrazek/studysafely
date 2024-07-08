@@ -14,7 +14,7 @@ interface DataMap {
 }
 const EditLanding = () => {
     const [data, setData] = useState<DataMap>()
-    const [image, setImage] = useState(undefined)
+    const [image, setImage] = useState<File|null>(null)
     const navigate = useNavigate();
 
     const {
@@ -40,29 +40,22 @@ const EditLanding = () => {
         const imageName = image?.name.split(".")[0]
         const id = uuidv4();
         const imageRef = ref(mediaUrl, `home/${imageName}${id}`);
-        const docRef = doc(collection(db, "home"), "landing")
-        uploadBytes(imageRef, image).then((res)=>{
-            getDownloadURL(res.ref).then((res)=>{
-                let formedData = {}
-                if(!image){
-                    formedData = {
+        if (image instanceof File) {
+            uploadBytes(imageRef, image).then((res) => {
+                getDownloadURL(res.ref).then((url) => {
+                    const formedData: FormMap = {
                         ...data,
-                        backgroundUrl:data.backgroundUrl,
-                        backgroundName:data.backgroundName
-                    }
-                }
-                else{
-                    formedData = {
-                        ...data,
-                        backgroundUrl:res,
-                        backgroundName:image?.name
-                    }
-                }
-                setDoc(docRef, formedData).then(()=>{
-                    navigate("/" );
-                })
-            })
-        })
+                        backgroundUrl: url,
+                        backgroundName: image.name,
+                    };
+
+                    const docRef = doc(collection(db, "home"), "landing");
+                    setDoc(docRef, formedData).then(() => {
+                        navigate("/");
+                    });
+                });
+            });
+        }
         
     };
 

@@ -16,16 +16,14 @@ import { register } from "swiper/element";
 register();
 
 const Accepted: React.FC = () => {
-    interface paramtersMap {
-        [key: string]: any;
-    }
+
     interface acceptedHomeMap {
-        acceptedList: [
+        acceptedList?: [
             {
                 [key: string]: string;
             }
         ];
-        header: string;
+        header?: string;
     }
     const [accptedHome, setAcceptedHome] = useState<acceptedHomeMap>();
     const widthCheck = (window.innerWidth) <  768;
@@ -33,14 +31,14 @@ const Accepted: React.FC = () => {
         // getting the accepted data related to the home page
         const fetchDataHome = async () => {
             const docRef = doc(collection(db, "home"), "accepted");
-            await getDoc(docRef).then((res: paramtersMap): void => {
-                const date: acceptedHomeMap = res.data();
+            await getDoc(docRef).then((res): void => {
+                const date = res.data();
                 setAcceptedHome(date);
             });
         };
         fetchDataHome();
     }, []);
-    const acceptedElement = accptedHome?.acceptedList.map((accepted, index) => {
+    const acceptedElement = accptedHome?.acceptedList?.map((accepted, index) => {
         return (
             <SwiperSlide key={index}>
                 <img src={accepted.imageUrl} alt={accepted.imageName} />

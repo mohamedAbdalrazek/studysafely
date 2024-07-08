@@ -4,26 +4,33 @@ import UploadImage from "../global/UploadImage";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { db, mediaUrl } from "../../api/firestore";
 import { v4 as uuidv4 } from "uuid";
-import { addDoc, collection, doc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import UploadMultibleImages from "../global/UploadMultibleImages";
 
-type pageDataMap = {
-    imagesList: [{ [key: string]: string }];
-} & {
-    [key: string]: string;
-};
+interface ImageData {
+    imageUrl: string;
+    imageName: string;
+}
+interface pageDataMap {
+    backgroundUrl: string;
+    backgroundName: string;
+    imagesList: ImageData[];
+    name: string;
+    body: string;
+    whatsLink: string;
+}
 const AddOtherService = () => {
     const navigate = useNavigate();
     const [images, setImages] = useState<File[]>();
-    const [background, setBackground] = useState<File>();
+    const [background, setBackground] = useState<File|null>();
     const [sending, setSending] = useState<boolean>(false);
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm();
-    const onSubmitTest = async (data: UniMap) => {
+    } = useForm<pageDataMap>();
+    const onSubmitTest = async (data: pageDataMap) => {
         setSending(true);
         const uploadBackground = async () => {
             if (background) {
@@ -137,12 +144,12 @@ const AddOtherService = () => {
             <UploadImage
                 setImage={setBackground}
                 name="other-background"
-                isRequied={true}
+                isRequired={true}
             />
             {/* ---------------------------------------------------------------------------------- */}
 
             <label className="admin-label">Upload Other Images </label>
-            <UploadMultibleImages setImagesList={setImages} initialImages={[]} setInitialImages={[]} />
+            <UploadMultibleImages setImagesList={setImages} initialImages={[]} setInitialImages={undefined} />
             {/* ---------------------------------------------------------------------------------- */}
 
             <input

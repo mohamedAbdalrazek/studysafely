@@ -1,15 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import "./video-page.css";
 import { useEffect, useState } from "react";
-import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
+import { collection, doc, onSnapshot} from "firebase/firestore";
 import { db } from "../api/firestore";
 import icon from "../assets/icons/play-button2.png";
 
 import SideBar from "../components/global/SideBar";
 import ReactPlayer from "react-player";
-interface paramtersMap {
-    [key: string]: any;
-}
 interface VideoMap {
     [key: string]: string;
 }
@@ -24,8 +21,8 @@ const VideoPage = () => {
             doc(collection(db, "videos"), "allVideos"),
             "allVideos"
         );
-        onSnapshot(videoRef, (res: paramtersMap): void => {
-            const videos: VideoMap[] = res.docs.map((doc: any) => ({
+        onSnapshot(videoRef, (res): void => {
+            const videos: VideoMap[] = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));

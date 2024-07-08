@@ -2,28 +2,27 @@ import { collection, doc, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../../api/firestore";
 import { Link } from "react-router-dom";
-interface paramtersMap {
-    [key: string]: any;
-}
+
 interface children {
     filter: string;
 }
 interface PublicMap {
-    body: string;
-    fee: number;
-    fieldsHeader: string;
-    backgroundUrl: string;
-    backgroundName: string;
-    desc: string;
-    imagesList: {
+    body?: string;
+    fee?: number;
+    fieldsHeader?: string;
+    backgroundUrl?: string;
+    backgroundName?: string;
+    desc?: string;
+    imagesList?: {
         [key: string]: string;
     }[];
-    location: string;
-    logoName: string;
-    logoUrl: string;
-    name: string;
-    studentsNumber: number;
-    whatsLink: string;
+    location?: string;
+    logoName?: string;
+    logoUrl?: string;
+    name?: string;
+    studentsNumber?: number;
+    whatsLink?: string;
+    id:string
 }
 const SidePublic = (children: children) => {
     const [publicUniList, setPublicUniList] = useState<PublicMap[]>();
@@ -32,8 +31,8 @@ const SidePublic = (children: children) => {
             doc(collection(db, "public"), "publicUni"),
             "publicUni"
         );
-        onSnapshot(publiceUniRef, (res: paramtersMap): void => {
-            const data: PublicMap[] = res.docs.map((doc: any) => ({
+        onSnapshot(publiceUniRef, (res): void => {
+            const data: PublicMap[] = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
@@ -62,7 +61,7 @@ const SidePublic = (children: children) => {
         publicUniList?.filter((uni) => uni.name != children.filter)
     );
     const listElement = filteredList?.map((uni) => {
-        const url: string = uni?.name.replace(/ /g, "-");
+        const url: string = uni.name?uni?.name.replace(/ /g, "-"):"";
         return (
             <Link to={"/public/" + url} key={uni?.name}>
                 <div className="image">

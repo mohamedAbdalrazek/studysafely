@@ -19,22 +19,19 @@ register();
 const NewsHome: React.FC = () => {
     // type script interfaces
     interface newHomeDataMap {
-        numberOfNews: number;
-        title: string;
-    }
-    interface paramtersMap {
-        [key: string]: any;
+        numberOfNews?: number;
+        title?: string;
     }
     interface newsListMap {
-        date:string,
-        hashtages:[{[key: string]: string;}],
-        imageName:string,
-        imageUrl:string,
-        parentDomain:string,
-        sortDate:number,
-        subDomain:string,
-        subTitle:string,
-        title:string,
+        date?:string,
+        hashtages?:string[],
+        imageName?:string,
+        imageUrl?:string,
+        parentDomain?:string,
+        sortDate?:number,
+        subDomain?:string,
+        subTitle?:string,
+        title?:string,
         id:string
     }
 
@@ -45,8 +42,8 @@ const NewsHome: React.FC = () => {
         // getting the new data related to the home page
         const fetchDataHome = async () => {
             const docRef = doc(collection(db, "home"), "news");
-            await getDoc(docRef).then((res: paramtersMap): void => {
-                const date: newHomeDataMap = res.data();
+            await getDoc(docRef).then((res): void => {
+                const date = res.data();
                 setNewsHomeData(date);
             });
         };
@@ -57,13 +54,13 @@ const NewsHome: React.FC = () => {
             doc(collection(db, "news"), "newsList"),
             "newsList"
         );
-        onSnapshot(listRef, (res: paramtersMap): void => {
-            const newsArr: newsListMap[] = res.docs.map((doc:any) => ({
+        onSnapshot(listRef, (res): void => {
+            const newsArr:newsListMap[] = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
             newsArr.sort((a, b) => {
-                return b.sortDate - a.sortDate;
+                return (b?.sortDate && a?.sortDate)?(b?.sortDate - a?.sortDate):0;
             });
             setNewsList(newsArr);
         });
@@ -71,7 +68,7 @@ const NewsHome: React.FC = () => {
     //returing html
     const newsListElement = newsList.slice(0,newsHomeData?.numberOfNews).map((news) => {
         return (
-            <SwiperSlide key={news.sortDate.toString()}>
+            <SwiperSlide key={news?.sortDate?.toString()}>
                 <Link to={`${news.parentDomain}/${news.subDomain}`}>
                     <div className="left">
                         <img src={news.imageUrl} alt={news.imageName} />
@@ -80,7 +77,7 @@ const NewsHome: React.FC = () => {
                         <h3>{news.title}</h3>
                         <p>{news.subTitle}</p>
                         <div>
-                            {news.hashtages.map((hashtage: any) => {
+                            {news.hashtages?.map((hashtage) => {
                                 return <span className="hashtage" key={hashtage}>{hashtage}</span>;
                             })}
                         </div>

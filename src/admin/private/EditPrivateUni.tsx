@@ -16,55 +16,51 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import UploadMultibleImages from "../global/UploadMultibleImages";
 
-interface UniMap {
-    body: string;
-    fee: number;
-    fieldsHeader: string;
-    backgroundUrl: string;
-    backgroundName: string;
-    fieldsList: {
-        buttonLink: string;
-        duration: number;
-        fee: number;
-        languege: "en" | "tr";
-        name: string;
-    }[];
-    imagesList: { [key: string]: string }[];
-    location: string;
-    logoName: string;
-    logoUrl: string;
-    name: string;
-    studentsNumber: number;
-    whatsapp: string;
-    id: string;
-}
 interface Field {
     buttonLink: string;
     duration: number;
     fee: number;
-    languege: "en" | "tr";
+    language: "en" | "tr";
     name: string;
 }
-interface paramtersMap {
-    [key: string]: any;
+interface ImageData {
+    imageUrl: string;
+    imageName: string;
 }
+interface UniMap {
+    body?: string;
+    fee?: number;
+    fieldsHeader?: string;
+    backgroundUrl?: string;
+    backgroundName?: string;
+    fieldsList?: Field[];
+    imagesList?:ImageData[];
+    location?: string;
+    logoName?: string;
+    logoUrl?: string;
+    name?: string;
+    studentsNumber?: number;
+    whatsapp?: string;
+    id: string;
+}
+
 const EditPrivateUni = () => {
     const navigate = useNavigate();
     const uniName = useLocation().pathname.split("/")[3].split("-").join(" ");
-    const [images, setImages] = useState<File[]>();
-    const [logo, setLogo] = useState<File>();
-    const [background, setBackground] = useState<File>();
+    const [images, setImages] = useState<File[]|null>();
+    const [logo, setLogo] = useState<File|null>();
+    const [background, setBackground] = useState<File|null>();
     const [fields, setFields] = useState<Field[]>([]);
     const [sending, setSending] = useState<boolean>(false);
     const [initialImages, setInitialImages] =
-        useState<{ [key: string]: string }[]>();
+        useState<ImageData[]|undefined>();
     const [uni, setUni] = useState<UniMap>();
     const {
         register,
         handleSubmit,
         formState: { errors },
         reset,
-    } = useForm();
+    } = useForm<UniMap>();
     useEffect(() => {
         const uniListRef = collection(
             doc(collection(db, "private"), "privateUni"),
@@ -72,8 +68,8 @@ const EditPrivateUni = () => {
         );
 
         const q = query(uniListRef, where("name", "==", uniName));
-        onSnapshot(q, (res: paramtersMap): void => {
-            const uniArr: UniMap[] = res.docs?.map((doc: any) => ({
+        onSnapshot(q, (res): void => {
+            const uniArr: UniMap[] = res.docs?.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
@@ -84,7 +80,7 @@ const EditPrivateUni = () => {
     }, [uniName, reset]);
     const onParentSubmit = async (data: UniMap) => {
         setSending(true);
-        data.imagesList = []
+        data.imagesList = [];
         const uploadLogo = async () => {
             if (logo) {
                 const logoName = logo?.name.split(".")[0];
@@ -160,7 +156,10 @@ const EditPrivateUni = () => {
         await uploadImages();
         setSending(false);
         const docRef = doc(
-            collection(doc(collection(db, "private"), "privateUni"), "privateUni"),
+            collection(
+                doc(collection(db, "private"), "privateUni"),
+                "privateUni"
+            ),
             uni?.id
         );
         await setDoc(docRef, data);
@@ -254,15 +253,16 @@ const EditPrivateUni = () => {
                 placeholder="Whatsapp Link"
                 className="admin-input"
             />
-            {errors.whatsapp && (errors.whatsapp.message?(
-                <p className="admin-error">
-                    {errors.whatsapp.message}
-                </p>
-            ):<p className="admin-error"> Whatsapp link is required</p>)}
+            {errors.whatsapp &&
+                (errors.whatsapp.message ? (
+                    <p className="admin-error">{errors.whatsapp.message}</p>
+                ) : (
+                    <p className="admin-error"> Whatsapp link is required</p>
+                ))}
             {/* ---------------------------------------------------------------------------------- */}
 
             <label className="admin-label">Upload The University's Logo</label>
-            <UploadImage setImage={setLogo} name="uni-logo" isRequied={true} />
+            <UploadImage setImage={setLogo} name="uni-logo" isRequired={true} />
             {!logo && (
                 <img src={uni?.logoUrl} alt="" className="preview-image" />
             )}
@@ -274,7 +274,7 @@ const EditPrivateUni = () => {
             <UploadImage
                 setImage={setBackground}
                 name="uni-background"
-                isRequied={true}
+                isRequired={true}
             />
             {!background && (
                 <img
@@ -310,7 +310,7 @@ const EditPrivateUni = () => {
             />
             <AddFieldList
                 setFieldsList={setFields}
-                fieldsList={uni?.fieldsList}
+                fieldsList={uni?.fieldsList||fields}
             />
             <input
                 type="submit"

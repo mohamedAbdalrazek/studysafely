@@ -14,14 +14,11 @@ import { faSquareWhatsapp } from '@fortawesome/free-brands-svg-icons'
 interface ApplyMap {
     [key: string]: string;
 }
-interface paramtersMap {
-    [key: string]: any;
-}
 const Home: React.FC = ()=>{
     const [data, setData] = useState<ApplyMap>();
     useEffect(() => {
         const docRef = doc(collection(db, "home"), "global");
-        getDoc(docRef).then((res: paramtersMap): void => {
+        getDoc(docRef).then((res): void => {
             const tempData = res.data();
             setData(tempData);
         });

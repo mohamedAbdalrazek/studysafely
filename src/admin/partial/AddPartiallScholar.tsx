@@ -4,29 +4,27 @@ import { addDoc, collection, doc, onSnapshot } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../api/firestore";
 
-interface paramtersMap {
-    [key: string]: any;
-}
 interface UniMap {
-    body: string;
-    fee: number;
-    fieldsHeader: string;
-    backgroundUrl: string;
-    backgroundName: string;
-    fieldsList: {
-        buttonLink: string;
-        duration: number;
-        fee: number;
-        language: string;
-        name: string;
+    body?: string;
+    fee?: number;
+    fieldsHeader?: string;
+    backgroundUrl?: string;
+    backgroundName?: string;
+    fieldsList?: {
+        buttonLink?: string;
+        duration?: number;
+        fee?: number;
+        language?: string;
+        name?: string;
     }[];
-    imagesList: [{ [key: string]: string }];
-    location: string;
-    logoName: string;
-    logoUrl: string;
-    name: string;
-    studentsNumber: number;
-    whatsLink: string;
+    imagesList?: [{ [key: string]: string }];
+    location?: string;
+    logoName?: string;
+    logoUrl?: string;
+    name?: string;
+    studentsNumber?: number;
+    whatsLink?: string;
+    id:string
 }
 interface ScholarListMap {
     body: string;
@@ -50,20 +48,20 @@ const AddPartialScholar = () => {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm();
+    } = useForm<ScholarListMap>();
     useEffect(() => {
         const uniListRef = collection(
             doc(collection(db, "private"), "privateUni"),
             "privateUni"
         );
-        onSnapshot(uniListRef, (res: paramtersMap): void => {
-            const uniArr: UniMap[] = res.docs.map((doc: any) => ({
+        onSnapshot(uniListRef, (res): void => {
+            const uniArr: UniMap[] = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
             const names: string[] = [];
             uniArr.forEach((uni) => {
-                names.push(uni.name);
+                names.push(uni.name||"");
             });
             setPrivateUniNames(names);
             setPrivateUniList(uniArr);

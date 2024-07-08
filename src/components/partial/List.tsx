@@ -1,42 +1,52 @@
-import { collection, doc, onSnapshot } from "firebase/firestore";
-import { forwardRef, useEffect, useState } from "react";
-import { db } from "../../api/firestore";
+import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import "./list.css";
 import { Link } from "react-router-dom";
-interface childrenMap {
-    [key: string]: any;
-}
-interface paramtersMap {
-    [key: string]: any;
-}
+import { db } from "../../api/firestore";
+
 interface ScholarListMap {
-    body: string;
-    buttonLink: string;
-    buttonText: string;
-    hashtages: string;
-    header: string;
-    mainInfo: string;
-    priceAfter: number;
-    priceBefore: number;
-    uniName: string;
-    logoUrl: string;
-    logoName: string;
+    body?: string;
+    buttonLink?: string;
+    buttonText?: string;
+    hashtages?: string;
+    header?: string;
+    mainInfo?: string;
+    priceAfter?: number;
+    priceBefore?: number;
+    uniName?: string;
+    logoUrl?: string;
+    logoName?: string;
+    id: string;
 }
-const List = (children: childrenMap) => {
+const List = ({
+    isPrivate,
+    location,
+}: {
+    isPrivate: boolean;
+    location: string | undefined;
+}) => {
     const [scholarList, setScholarList] = useState<ScholarListMap[]>([]);
     useEffect(() => {
-        const scholarListRef = children.listRef;
-        onSnapshot(scholarListRef, (res: paramtersMap): void => {
-            const scholarData: ScholarListMap[] = res.docs.map((doc: any) => ({
+        const scholarListRef = collection(
+            doc(collection(db, "partial"), "partialScholars"),
+            "partialScholars"
+        );
+        const q = query(scholarListRef, where("uniName", "==", location?location:""));
+        onSnapshot(isPrivate ? q : scholarListRef, (res): void => {
+            const scholarData: ScholarListMap[] = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
             setScholarList(scholarData);
         });
-    }, []);
+    }, [isPrivate, location]);
     const scholarListElement = scholarList.map((scholar) => {
-        const hashtagesArray = scholar.hashtages.split(".");
-        const url: string = scholar.mainInfo.replace(/ /g, "-");
+        const hashtagesArray = scholar.hashtages
+            ? scholar.hashtages.split(".")
+            : [];
+        const url: string = scholar.mainInfo
+            ? scholar.mainInfo.replace(/ /g, "-")
+            : "";
         return (
             <div className="scholar">
                 <div className="content">
@@ -78,7 +88,15 @@ const List = (children: childrenMap) => {
             {scholarList.length > 0 ? (
                 <div className="scholar-list">{scholarListElement}</div>
             ) : (
-                <h1 style={{textAlign:"center", marginTop:"40px", color:"var(--sub-dark)"}}>لا توجد منح حاليا</h1>
+                <h1
+                    style={{
+                        textAlign: "center",
+                        marginTop: "40px",
+                        color: "var(--sub-dark)",
+                    }}
+                >
+                    لا توجد منح حاليا
+                </h1>
             )}
         </>
     );

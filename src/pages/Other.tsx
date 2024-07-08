@@ -7,11 +7,9 @@ import { db } from "../api/firestore";
 import { Navigate, useLocation } from "react-router-dom";
 import ReactPlayer from "react-player";
 import ImageSlider from "../components/global/ImagesSlider";
-interface paramtersMap {
-    [key: string]: any;
-}
+
 type pageDataMap = {
-    imagesList: [{ [key: string]: string }];
+    imagesList?: [{ [key: string]: string }];
 } & {
     [key: string]: string;
 };
@@ -29,8 +27,8 @@ const Other = () => {
         const collectionRef = collection(db, "other");
         const q = query(collectionRef, where("name", "==", location));
         
-        onSnapshot(q, (res: paramtersMap): void => {
-            const data: pageDataMap[] = res.docs.map((doc: any) => ({
+        onSnapshot(q, (res): void => {
+            const data = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
@@ -44,8 +42,8 @@ const Other = () => {
             "allVideos"
         );
         const videoQ = query(videoRef, where("domain", "==", location));
-        onSnapshot(videoQ, (res: paramtersMap): void => {
-            const videos: VideoMap[] = res.docs.map((doc: any) => ({
+        onSnapshot(videoQ, (res): void => {
+            const videos: VideoMap[] = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));

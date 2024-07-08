@@ -1,25 +1,35 @@
 import { useRef } from "react";
-import "./upload-image.css"
+import "./upload-image.css";
+
 interface ParamMap {
-    setImage: React.Dispatch<React.SetStateAction<string>>;
-    name:string;
-    isRequired:boolean
+    setImage: (file:File|null) => void;
+    name: string;
+    isRequired?: boolean; 
 }
+
 export default function UploadImage({
     setImage,
     name,
-    isRequired = false
-}:ParamMap) {
+    isRequired = false, 
+}: ParamMap) {
     const inputRef = useRef<HTMLInputElement>(null);
-    function handleChange(e:React.ChangeEvent<HTMLInputElement>) {
-        setImage(e.target.files[0]);
-    }
-    function handleDelete() {
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            setImage(file);
+        } else {
+            setImage(null);
+        }
+    };
+
+    const handleDelete = () => {
         setImage(null);
         if (inputRef.current) {
-            inputRef.current.value = '';
+            inputRef.current.value = "";
         }
-    }   
+    };
+
     return (
         <label
             htmlFor={name ? name : "image"}
@@ -36,7 +46,11 @@ export default function UploadImage({
                 className="upload"
                 onChange={(e) => handleChange(e)}
             />
-            <button type="button" onClick={handleDelete} className="delete-button">
+            <button
+                type="button"
+                onClick={handleDelete}
+                className="delete-button"
+            >
                 x
             </button>
         </label>

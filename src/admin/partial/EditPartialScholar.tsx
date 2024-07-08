@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import UploadImage from "../global/UploadImage";
-import AddFieldList from "../global/AddFieldList";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { db, mediaUrl } from "../../api/firestore";
-import { v4 as uuidv4 } from "uuid";
 import {
     collection,
     doc,
@@ -14,44 +9,21 @@ import {
     where,
 } from "firebase/firestore";
 import { useLocation, useNavigate } from "react-router-dom";
-import UploadMultibleImages from "../global/UploadMultibleImages";
+import { db } from "../../api/firestore";
 
-interface paramtersMap {
-    [key: string]: any;
-}
-interface UniMap {
-    body: string;
-    fee: number;
-    fieldsHeader: string;
-    backgroundUrl: string;
-    backgroundName: string;
-    fieldsList: {
-        buttonLink: string;
-        duration: number;
-        fee: number;
-        language: string;
-        name: string;
-    }[];
-    imagesList: [{ [key: string]: string }];
-    location: string;
-    logoName: string;
-    logoUrl: string;
-    name: string;
-    studentsNumber: number;
-    whatsLink: string;
-}
+
 interface ScholarListMap {
-    body: string;
-    buttonLink: string;
-    buttonText: string;
-    hashtages: string;
-    header: string;
-    mainInfo: string;
-    priceAfter: number;
-    priceBefore: number;
-    uniName: string;
-    logoUrl: string;
-    logoName: string;
+    body?: string;
+    buttonLink?: string;
+    buttonText?: string;
+    hashtages?: string;
+    header?: string;
+    mainInfo?: string;
+    priceAfter?: number;
+    priceBefore?: number;
+    uniName?: string;
+    logoUrl?: string;
+    logoName?: string;
     id:string;
 }
 const EditPartialScholar = () => {
@@ -66,7 +38,7 @@ const EditPartialScholar = () => {
         handleSubmit,
         formState: { errors },
         reset,
-    } = useForm();
+    } = useForm<ScholarListMap>();
     useEffect(() => {
         const partialScholarRef = collection(
             doc(collection(db, "partial"), "partialScholars"),
@@ -74,8 +46,8 @@ const EditPartialScholar = () => {
         );
 
         const q = query(partialScholarRef, where("mainInfo", "==", mainInfo));
-        onSnapshot(q, (res: paramtersMap): void => {
-            const scholarArr: ScholarListMap[] = res.docs?.map((doc: any) => ({
+        onSnapshot(q, (res): void => {
+            const scholarArr: ScholarListMap[] = res.docs?.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
@@ -89,7 +61,6 @@ const EditPartialScholar = () => {
             ...scholar,
             ...data,
         }
-        console.log(formedData)
         const docRef = doc(
             collection(doc(collection(db, "partial"), "partialScholars"), "partialScholars"),
             scholar?.id

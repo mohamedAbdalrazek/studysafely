@@ -8,18 +8,16 @@ import ReactPlayer from "react-player";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareWhatsapp } from "@fortawesome/free-brands-svg-icons";
 interface AgentMap {
-    [key: string]: string;
+    [key: string]: string|undefined;
 }
-interface paramtersMap{
-    [key: string]: any;
-}
+
 const Agent = ()=>{
-    const [agentData, setAgentData] = useState<AgentMap>({});
+    const [agentData, setAgentData] = useState<AgentMap|undefined>({});
     const [video, setVideo] = useState<AgentMap>({});
     useEffect(() => { 
         const docRef = doc(collection(db, "agent"), "agentPage");
         const fetchData  = async ()=>{
-            await getDoc(docRef).then((res: paramtersMap): void => {
+            await getDoc(docRef).then((res): void => {
                 const date = res.data();
                 setAgentData(date);
             });
@@ -27,8 +25,8 @@ const Agent = ()=>{
         fetchData()
         const videoRef = collection(doc(collection(db, "videos"), "other"), "videosList")
         const q = query(videoRef , where("domain" , "==", "agent"))
-        onSnapshot(q, (res: paramtersMap): void => {
-            const videos: AgentMap[] = res.docs.map((doc:any) => ({
+        onSnapshot(q, (res): void => {
+            const videos: AgentMap[] = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
@@ -39,7 +37,7 @@ const Agent = ()=>{
         <div className="agent">
             <div className="container">
                 <h1 className="special-header">
-                    {agentData.header}
+                    {agentData?.header}
                 </h1>
                 <div className="content">
                 

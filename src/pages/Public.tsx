@@ -10,26 +10,24 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareWhatsapp } from "@fortawesome/free-brands-svg-icons";
 const Public = ()=>{
-    interface paramtersMap {
-        [key: string]: any;
-    }
+
     interface pageDatamap {
-        infoList: [
+        infoList?: [
             {
                 [key: string]: string;
             } 
         ];
-        infoHeader: string;
-        listHeader: string;
-        listNumber: number;
-        moreVideos: string;
-        videosHeader: string;
-        whatsapp: string;
+        infoHeader?: string;
+        listHeader?: string;
+        listNumber?: number;
+        moreVideos?: string;
+        videosHeader?: string;
+        whatsapp?: string;
     }
     const [pageData, setPageData] = useState<pageDatamap>();
     useEffect(() => {
         const docRef = doc(collection(db, "public"), "public");
-        getDoc(docRef).then((res: paramtersMap): void => {
+        getDoc(docRef).then((res): void => {
             const date = res.data();
             setPageData(date);
         });

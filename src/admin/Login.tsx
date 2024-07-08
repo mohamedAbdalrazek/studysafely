@@ -3,6 +3,7 @@ import "./login.css";
 import { auth } from "../api/firestore";
 import { Navigate, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword, UserCredential } from "firebase/auth";
+import { FirebaseError } from "firebase/app";
 
 export default function Login() {
     const [email, setEmail] = useState<string>("");
@@ -26,25 +27,29 @@ export default function Login() {
             localStorage.setItem("user", JSON.stringify(user));
 
             navigate("/4ebdeab6-4058-4671-942a-258434abb061");
-        } catch (err: any) {
-            switch (err.code) {
-                case "auth/user-not-found":
-                case "auth/wrong-password":
-                    setError("Incorrect email or password.");
-                    break;
-                case "auth/too-many-requests":
-                    setError(
-                        "Too many login attempts. Please try again later."
-                    );
-                    break;
-                case "auth/network-request-failed":
-                    setError("Network error. Please check your connection.");
-                    break;
-                default:
-                    setError(
-                        "An unexpected error occurred. Please try again later."
-                    );
-                    break;
+        } catch (err) {
+            if (err instanceof FirebaseError) {
+                switch (err.code) {
+                    case "auth/user-not-found":
+                    case "auth/wrong-password":
+                        setError("Incorrect email or password.");
+                        break;
+                    case "auth/too-many-requests":
+                        setError(
+                            "Too many login attempts. Please try again later."
+                        );
+                        break;
+                    case "auth/network-request-failed":
+                        setError(
+                            "Network error. Please check your connection."
+                        );
+                        break;
+                    default:
+                        setError(
+                            "An unexpected error occurred. Please try again later."
+                        );
+                        break;
+                }
             }
         } finally {
             setSending(false);

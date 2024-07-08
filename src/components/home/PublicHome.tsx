@@ -7,23 +7,21 @@ import "./news-home.css";
 
 import Slider  from "../global/Slider"
 const PublicHome:React.FC = ()=>{
-    interface paramtersMap {
-        [key: string]: any;
-    }
+
     interface publicHomeMap {
-        dataList : [{
+        dataList?: [{
             [key: string]: string;
         }]
-        header:string,
-        link:string
+        header?:string,
+        link?:string
     }
     const [publicHome, setPublicHome] = useState<publicHomeMap>()
     useEffect(() => {
         // getting the new data related to the home page
         const fetchDataHome = async () => {
             const docRef = doc(collection(db, "home"), "public");
-            await getDoc(docRef).then((res: paramtersMap): void => {
-                const date: publicHomeMap = res.data();
+            await getDoc(docRef).then((res): void => {
+                const date = res.data();
                 setPublicHome(date);
             });
         };

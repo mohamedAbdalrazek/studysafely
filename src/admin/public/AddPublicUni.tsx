@@ -9,6 +9,17 @@ import { addDoc, collection, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import UploadMultibleImages from "../global/UploadMultibleImages";
 
+interface Field {
+    buttonLink: string;
+    duration: number;
+    fee: number;
+    language: "en" | "tr";
+    name: string;
+}
+interface ImageData {
+    imageUrl: string;
+    imageName: string;
+}
 interface UniMap {
     body: string;
     fee: number;
@@ -16,14 +27,8 @@ interface UniMap {
     backgroundUrl: string;
     backgroundName: string;
     desc:string;
-    fieldsList: {
-        buttonLink: string;
-        duration: number;
-        fee: number;
-        languege: "en" | "tr";
-        name: string;
-    }[];
-    imagesList: { [key: string]: string }[];
+    fieldsList:Field[];
+    imagesList: ImageData[];
     location: string;
     logoName: string;
     logoUrl: string;
@@ -31,25 +36,19 @@ interface UniMap {
     studentsNumber: number;
     whatsapp: string;
 }
-interface Field {
-    buttonLink: string;
-    duration: number;
-    fee: number;
-    languege: "en" | "tr";
-    name: string;
-}
+
 const AddPublicUni = () => {
     const navigate = useNavigate();
-    const [images, setImages] = useState<File[]>();
-    const [logo, setLogo] = useState<File>();
-    const [background, setBackground] = useState<File>();
+    const [images, setImages] = useState<File[]|null>();
+    const [logo, setLogo] = useState<File|null>();
+    const [background, setBackground] = useState<File|null>();
     const [fields, setFields] = useState<Field[]>([]);
     const [sending, setSending] = useState<boolean>(false);
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm();
+    } = useForm<UniMap>();
     const onSubmitTest = async (data: UniMap) => {
         setSending(true);
         const uploadLogo = async () => {
@@ -228,7 +227,7 @@ const AddPublicUni = () => {
             {/* ---------------------------------------------------------------------------------- */}
 
             <label className="admin-label">Upload The University's Logo</label>
-            <UploadImage setImage={setLogo} name="uni-logo" isRequied={true} />
+            <UploadImage setImage={setLogo} name="uni-logo" isRequired={true} />
             {/* ---------------------------------------------------------------------------------- */}
 
             <label className="admin-label">
@@ -237,7 +236,7 @@ const AddPublicUni = () => {
             <UploadImage
                 setImage={setBackground}
                 name="uni-background"
-                isRequied={true}
+                isRequired={true}
             />
             {/* ---------------------------------------------------------------------------------- */}
 
@@ -258,7 +257,7 @@ const AddPublicUni = () => {
             {/* ---------------------------------------------------------------------------------- */}
 
             <label className="admin-label">Upload Other Images </label>
-            <UploadMultibleImages setImagesList={setImages} initialImages={[]} setInitialImages={[]} />
+            <UploadMultibleImages setImagesList={setImages} initialImages={[]} setInitialImages={undefined} />
 
             <AddFieldList setFieldsList={setFields} fieldsList={fields} />
             <input

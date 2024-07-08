@@ -2,31 +2,30 @@ import { collection, doc, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../../api/firestore";
 import { Link } from "react-router-dom";
-interface paramtersMap {
-    [key: string]: any;
-}
+
 interface children {
     filter: string;
 }
 interface PrivateMap {
-    body: string;
-    fee: number;
-    fieldsHeader: string;
-    backgroundUrl: string;
-    backgroundName: string;
-    fieldsList: {
+    body?: string;
+    fee?: number;
+    fieldsHeader?: string;
+    backgroundUrl?: string;
+    backgroundName?: string;
+    fieldsList?: {
         buttonLink: string;
         duration: number;
         fee: number;
         language: string;
         name: string;
     }[];
-    location: string;
-    logoName: string;
-    logoUrl: string;
-    name: string;
-    studentsNumber: number;
-    whatsLink: string;
+    location?: string;
+    logoName?: string;
+    logoUrl?: string;
+    name?: string;
+    studentsNumber?: number;
+    whatsLink?: string;
+    id:string
 }
 
 const SidePrivate = (children: children) => {
@@ -36,8 +35,8 @@ const SidePrivate = (children: children) => {
             doc(collection(db, "private"), "privateUni"),
             "privateUni"
         );
-        onSnapshot(privateUniRef, (res: paramtersMap): void => {
-            const data: PrivateMap[] = res.docs.map((doc: any) => ({
+        onSnapshot(privateUniRef, (res): void => {
+            const data: PrivateMap[] = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
@@ -67,7 +66,7 @@ const SidePrivate = (children: children) => {
         privateUniList?.filter((uni) => uni.name != children.filter)
     );
     const listElement = filteredList?.map((uni) => {
-        const url: string = uni?.name.replace(/ /g, "-");
+        const url: string = uni.name?uni?.name.replace(/ /g, "-"):"";
         return (
             <Link to={"/private/" + url} key={uni?.name}>
                 <div className="image">

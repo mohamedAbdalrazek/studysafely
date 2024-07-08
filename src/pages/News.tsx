@@ -5,51 +5,48 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import SideBar from "../components/global/SideBar";
 interface pageDataMap {
-    number: number;
-    sidebarPrivate: string;
-    sidebarPublic: string;
-    sidebarVideos: string;
-    title: string;
-}
-interface paramtersMap {
-    [key: string]: any;
+    number?: number;
+    sidebarPrivate?: string;
+    sidebarPublic?: string;
+    sidebarVideos?: string;
+    title?: string;
 }
 interface newsListMap {
-    hashtages: [string];
-    date: string;
-    imageName: string;
-    imageUrl: string;
-    sortDate: number;
-    parentDomain: string;
-    subDomain: string;
-    subTitle: string;
-    title: string;
+    hashtages?: string[];
+    date?: string;
+    imageName?: string;
+    imageUrl?: string;
+    sortDate?: number;
+    parentDomain?: string;
+    subDomain?: string;
+    subTitle?: string;
+    title?: string;
+    id:string
 }
 const News: React.FC = () => {
-    const [searchParams, setSearchParams]: [URLSearchParams, Function] =
-        useSearchParams();
+    const [searchParams, setSearchParams]=useSearchParams();
     const [pageData, setPageData] = useState<pageDataMap>();
     const [newsList, setNewsList] = useState<newsListMap[]>([]);
     // const [pagesNumberArray, setPagesNumberArray] = useState<number[]>();
     const [pageDataNumber, setPageDataNumber] = useState(1)
     useEffect(() => {
         const docRef = doc(collection(db, "news"), "page");
-        getDoc(docRef).then((res: paramtersMap): void => {
+        getDoc(docRef).then((res): void => {
             const data = res.data();
             setPageData(data);
-            setPageDataNumber(data.number)
+            setPageDataNumber(data?.number)
         });
         const newsListRef = collection(
             doc(collection(db, "news"), "newsList"),
             "newsList"
         );
-        onSnapshot(newsListRef, (res: paramtersMap): void => {
-            const newsData: newsListMap[] = res.docs.map((doc: any) => ({
+        onSnapshot(newsListRef, (res): void => {
+            const newsData:newsListMap[]= res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
             newsData.sort((a, b) => {
-                return b.sortDate - a.sortDate;
+                return (b.sortDate&& a.sortDate)?(b.sortDate - a.sortDate):0;
             });
             setNewsList(newsData);
         })
@@ -68,7 +65,7 @@ const News: React.FC = () => {
                 <div className="left">
                     <h3>{news?.title}</h3>
                     <div>
-                        {news.hashtages.map((hashtage) => {
+                        {news.hashtages?.map((hashtage) => {
                             return (
                                 <span key={hashtage} className="hashtage">
                                     {hashtage}
@@ -88,7 +85,7 @@ const News: React.FC = () => {
         return (
             <span
                 key={pageNumber}
-                onClick={() => setSearchParams({ page: pageNumber })}
+                onClick={() => setSearchParams({ page: pageNumber.toString() })}
             >
                 {pageNumber}
             </span>

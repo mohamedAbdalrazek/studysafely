@@ -17,28 +17,26 @@ import ImageSlider from "../components/global/ImagesSlider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareWhatsapp } from "@fortawesome/free-brands-svg-icons";
 interface UniMap {
-    body: string;
-    fee: number;
-    fieldsHeader: string;
-    backgroundUrl: string;
-    backgroundName: string;
-    fieldsList: {
+    body?: string;
+    fee?: number;
+    fieldsHeader?: string;
+    backgroundUrl?: string;
+    backgroundName?: string;
+    fieldsList?: {
         buttonLink: string;
         duration: number;
         fee: number;
         language: string;
         name: string;
     }[];
-    imagesList: [{ [key: string]: string }];
-    location: string;
-    logoName: string;
-    logoUrl: string;
-    name: string;
-    studentsNumber: number;
-    whatsapp: string;
-}
-interface paramtersMap {
-    [key: string]: any;
+    imagesList?: [{ [key: string]: string }];
+    location?: string;
+    logoName?: string;
+    logoUrl?: string;
+    name?: string;
+    studentsNumber?: number;
+    whatsapp?: string;
+    id:string
 }
 interface FlagsMap {
     [key: string]: string;
@@ -50,7 +48,7 @@ const PublicPage = () => {
 
     useEffect(() => {
         const flagsRef = doc(collection(db, "global"), "flags");
-        getDoc(flagsRef).then((res: paramtersMap): void => {
+        getDoc(flagsRef).then((res): void => {
             const date = res.data();
             setFlags(date);
         });
@@ -60,15 +58,15 @@ const PublicPage = () => {
         );
 
         const q = query(uniListRef, where("name", "==", location));
-        onSnapshot(q, (res: paramtersMap): void => {
-            const uniArr: UniMap[] = res.docs.map((doc: any) => ({
+        onSnapshot(q, (res): void => {
+            const uniArr = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
             setUni(uniArr[0]);
         });
-    }, []);
-    const fieldsList = uni?.fieldsList.map((field) => {
+    }, [location]);
+    const fieldsList = uni?.fieldsList?.map((field) => {
         return (
             <div className="field" key={field.name}>
                 <h3>{field.name}</h3>
@@ -106,7 +104,7 @@ const PublicPage = () => {
                             <span>Students: {uni?.studentsNumber}</span>
                         </div>
                     </div>
-                    {uni?.imagesList.length ? (
+                    {uni?.imagesList?.length ? (
                         <div>
                             <h3 className="special-sub-header">
                                 صور من الجامعة
@@ -115,7 +113,7 @@ const PublicPage = () => {
                         </div>
                     ) : undefined}
                     <div className="body">{uni?.body && parse(uni?.body)}</div>
-                    {uni?.fieldsList.length ? (
+                    {uni?.fieldsList?.length ? (
                         <div className="fields">
                             <h3 className="special-sub-header">التخصصات</h3>
                             <div className="fields-list">{fieldsList}</div>

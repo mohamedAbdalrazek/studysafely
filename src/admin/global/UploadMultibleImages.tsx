@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 import UploadImage from "./UploadImage"; // Ensure the correct import path
 import "./upload-image.css";
 
@@ -9,23 +9,25 @@ interface Image {
 
 interface ParamMap {
     setImagesList: (images: File[]) => void;
-    initialImages: Image[];
-    setInitialImages: (initialImages: Image[]) => void;
+    initialImages: Image[]|undefined;
+    setInitialImages: React.Dispatch<React.SetStateAction<Image[]|undefined>> | undefined;
 }
 
-export default function UploadMultipleImages({
+const UploadMultipleImages: React.FC<ParamMap> = ({
     setImagesList,
     initialImages,
     setInitialImages,
-}: ParamMap) {
+}) => {
     const [images, setImages] = useState<File[]>([]);
 
-    const addImage = (file: File) => {
-        setImages((prevImages) => {
-            const newImages = [...prevImages, file];
-            setImagesList(newImages);
-            return newImages;
-        });
+    const addImage = (file: File | null) => {
+        if (file) {
+            setImages((prevImages) => {
+                const newImages = [...prevImages, file];
+                setImagesList(newImages);
+                return newImages;
+            });
+        }
     };
 
     const removeImage = (index: number) => {
@@ -37,7 +39,11 @@ export default function UploadMultipleImages({
     };
 
     const removeInitialImage = (index: number) => {
-        setInitialImages((prevImages) => prevImages.filter((_, i) => i !== index));
+        if (setInitialImages) {
+            setInitialImages((prevImages) =>
+                prevImages?.filter((_, i) => i !== index)
+            );
+        }
     };
 
     const originalImagesElement = initialImages?.map((image, index) => (
@@ -57,8 +63,8 @@ export default function UploadMultipleImages({
         <div>
             <UploadImage setImage={addImage} name="multiple-images" />
             <div className="images-preview">
-                {initialImages && originalImagesElement}
-                {images?.map((image, index) => (
+                {originalImagesElement}
+                {images.map((image, index) => (
                     <div key={index} className="image-container">
                         <p className="image-name">{image.name}</p>
                         <button
@@ -73,4 +79,6 @@ export default function UploadMultipleImages({
             </div>
         </div>
     );
-}
+};
+
+export default UploadMultipleImages;

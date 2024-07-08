@@ -17,7 +17,7 @@ const EditPrivateHome = () => {
     const navigate = useNavigate();
 
     const [data, setData] = useState<DataMap>();
-    const [image, setImage] = useState();
+    const [image, setImage] = useState<File|null>();
     const {
         register,
         handleSubmit,
@@ -47,7 +47,9 @@ const EditPrivateHome = () => {
                 console.log(err);
             });
     }, [reset]);
-    
+    const addImage = (file:File|null)=>{
+        setImage(file)
+    }
     const onSubmit = async (tempData: FormMap) => {
         let formedData = {
             ...tempData,
@@ -144,7 +146,7 @@ const EditPrivateHome = () => {
                 </p>
             )}
 
-            <UploadImage setImage={setImage} name="private-home-image" />
+            <UploadImage setImage={addImage} name="private-home-image" />
             {!image && (
                 <img src={data?.imageUrl} alt="" className="preview-image" />
             )}

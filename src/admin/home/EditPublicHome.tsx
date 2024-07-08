@@ -12,19 +12,23 @@ interface FormMap {
 }
 interface DataMap {
     dataList: {
-        [key: string]: string;
+        imageUrl?: string;
+        imageName?: string;
+        header:string;
+        subHeader:string;
     }[];
     header: string;
     link: string;
 }
 
+
 const EditPublicHome = () => {
     const navigate = useNavigate();
 
     const [data, setData] = useState<DataMap>();
-    const [firstImage, setFirstImage] = useState();
-    const [secondImage, setSecondImage] = useState();
-    const [thirdImage, setThirdImage] = useState();
+    const [firstImage, setFirstImage] = useState<File|null>();
+    const [secondImage, setSecondImage] = useState<File|null>();
+    const [thirdImage, setThirdImage] = useState<File|null>();
     const {
         register,
         handleSubmit,
@@ -55,28 +59,28 @@ const EditPublicHome = () => {
     }, [reset]);
     
 
-    const onSubmit = async (data: FormMap) => {
+    const onSubmit = async (formData: FormMap) => {
         let formedData: DataMap = {
-            header: data.header,
-            link: data.link,
+            header: formData.header,
+            link: formData.link,
             dataList: [
                 {
-                    imageUrl: data.dataList[0].imageUrl,
-                    imageName: data.dataList[0].imageName,
-                    header: data.firstHeader,
-                    subHeader: data.firstSubHeader,
+                    imageUrl: data?.dataList[0].imageUrl,
+                    imageName: data?.dataList[0].imageName,
+                    header: formData.firstHeader,
+                    subHeader: formData.firstSubHeader,
                 },
                 {
-                    imageUrl: data.dataList[1].imageUrl,
-                    imageName: data.dataList[1].imageName,
-                    header: data.secondHeader,
-                    subHeader: data.secondSubHeader,
+                    imageUrl: data?.dataList[1].imageUrl,
+                    imageName: data?.dataList[1].imageName,
+                    header: formData.secondHeader,
+                    subHeader: formData.secondSubHeader,
                 },
                 {
-                    imageUrl: data.dataList[2].imageUrl,
-                    imageName: data.dataList[2].imageName,
-                    header: data.thirdHeader,
-                    subHeader: data.thirdSubHeader,
+                    imageUrl: data?.dataList[2].imageUrl,
+                    imageName: data?.dataList[2].imageName,
+                    header: formData.thirdHeader,
+                    subHeader: formData.thirdSubHeader,
                 },
             ],
         };

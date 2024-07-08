@@ -1,33 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { addDoc, arrayUnion, collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
+import { arrayUnion, collection, doc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { db, mediaUrl } from "../../api/firestore";
 import { v4 as uuidv4 } from "uuid";
 import UploadImage from "../global/UploadImage";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-interface paramtersMap {
-    [key: string]: any;
-}
-interface newsListMap {
-    hashtages: string;
-    parentDomain: string;
-    subDomain: string;
-    subTitle: string;
-    title: string;
-}
-interface FormedDataMap {
-    hashtages: string[];
-    date: string;
-    imageName: string;
-    imageUrl: string;
-    sortDate: number;
-    parentDomain: string;
-    subDomain: string;
-    subTitle: string;
-    title: string;
-}
+
+
 const AddNews = () => {
     const navigate = useNavigate();
     const [sending, setSending] = useState(false);
@@ -35,7 +16,7 @@ const AddNews = () => {
     const {
         handleSubmit,
     } = useForm();
-    const onParentSubmit = async (data: newsListMap) => {
+    const onParentSubmit = async () => {
         setSending(true);
         let imageObject:{imageUrl:string, imageName:string}={imageName:'', imageUrl:""}
         const uploadImage = async () => {
@@ -62,15 +43,20 @@ const AddNews = () => {
         setSending(false);
         navigate("/4ebdeab6-4058-4671-942a-258434abb061/accepted");
     };
+    const addImage = (file:File|null)=>{
+        if(file){
+            setImage(file)
+        }
+    }
     return (
         <form onSubmit={handleSubmit(onParentSubmit)}>
             <h1 className="admin-main-header">Add Image for an accepted student</h1>
             {/* ---------------------------------------------------------------------------------- */}
             <label className="admin-label">Upload a Image</label>
             <UploadImage
-                setImage={setImage}
+                setImage={addImage}
                 name="news-image"
-                isRequied={true}
+                isRequired={true}
             />
             {/* ---------------------------------------------------------------------------------- */}
             <input

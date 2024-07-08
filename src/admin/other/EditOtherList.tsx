@@ -4,20 +4,23 @@ import { db } from "../../api/firestore";
 import EditListItem from "../global/EditListItem";
 import { Link } from "react-router-dom";
 
-interface paramtersMap {
-    [key: string]: any;
+
+interface OtherListMap {
+    backgroundUrl?: string;
+    backgroundName?: string;
+    imagesList?: ImageData[];
+    name?: string;
+    body?: string;
+    whatsLink?: string;
+    id:string
 }
-type OtherListMap = {
-    imagesList: [{ [key: string]: string }];
-} & {
-    [key: string]: string;
-};
+
 const EditOtherList = ()=>{
     const [otherList, setOtherList] = useState<OtherListMap[]>([]);
     useEffect(() => {
         const otherListRef = collection(db, "other")
-        onSnapshot(otherListRef, (res: paramtersMap): void => {
-            const otherData: OtherListMap[] = res.docs.map((doc: any) => ({
+        onSnapshot(otherListRef, (res): void => {
+            const otherData: OtherListMap[] = res.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
@@ -30,11 +33,9 @@ const EditOtherList = ()=>{
         await deleteDoc(docRef)
     };
     const listElement = otherList.map((item)=>{
-        const url:string = item.name.replace(/ /g, "-")
-
-
+        const url: string = item?.name ? item.name.replace(/ /g, "-") : "";
         return(
-            <EditListItem name={item.name} isEdit={true} domain={url} handleDelete={handleDelete} />
+            <EditListItem name={item.name||""} isEdit={true} domain={url} handleDelete={handleDelete} />
         )
     })
     return(
